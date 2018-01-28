@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px|Supermercado+One|Ubuntu');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url("../img/footer_lodyas.png");
+    color: white;
+}
+
+/* -- FONTS -- */
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Supermercado 27px";
+}
+
+h2 {
+    font-size: 40px;
+}
+
+h3 {
+    font-size: 28px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+p {
+    font-family: "Ubuntu";
+}
+
+/* -- SHARED --*/
+
+.container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.outer {
+    margin: 0 auto;
+    padding: 8px;
+    border: 1px solid white;
+}
+
+.inner {
+    padding: 20px;
+    border: 1px solid white;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* -- SCENE CONTAINER -- */
+
+#scene-container {
+    position: relative;
+}
+
+#scene-container .outer {
+    width: 1200px;
+    margin-bottom: 60px;
+    margin-top: 20px;
+}
+
+#scene-container .outer .inner h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#scene-container .outer .inner p {
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+/* -- CHOICES CONTAINER -- */
+
+#choices-container .outer {
+    width: 1200px;
+}
+
+#choices-container .outer .inner h3 {
+    text-align: center
+}
+
+#choices-container ul li {
+    list-style-type: none;
+    margin: 5px 0;
+    font-size: 22px;
+    padding: 10px;
+}
+
+#choices-container ul li:hover {
+    background: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+/* -- INVENTORY CONTAINER -- */
+
+#inventory-container .outer {
+    width: 250px;
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    left: 15px;
+}
+
+#inventory-container .outer .inner h4 {
+    text-align: center;
+    border-bottom: 1px solid white;
+    margin-bottom: 10px;
+}
+
+#inventory-container ul {
+    list-style-type: none;
+    text-align: center;
+}
+
+#inventory-container ul li {
+    font-size: 20px;
+    padding: 10px 0;
+}
+
+#inventory-container ul li:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#inventory-container .description-container {
+    margin-top: 25px;
+    border: 1px dashed white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+#inventory-container .description-container p {
+    font-size: 15px;
+}
+
+/* -- STATS CONTAINER */
+
+#stats-container .outer {
+    width: 250px;
+    position: absolute;
+    top: 20px;
+    right: 15px;
+}
+
+#stats-container .outer .inner h4 {
+    text-align: center;
+}

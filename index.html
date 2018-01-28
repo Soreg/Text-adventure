@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Text-based adventure</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="inventory-container">
+            <div class="outer">
+                <div class="inner">
+                    <h4>Inventory</h4>
+                    <ul>
+                        <li class="health-potion inventory-element">Health potion</li>
+                        <li class="stamina-potion inventory-element">Stamina potion</li>
+                        <li class="fireball-scroll inventory-element">Fireball scroll</li>
+                        <li class="rat-meat inventory-element">Rat's meat</li>
+                    </ul>
+                    <div class="description-container">
+                        <p class="inventory-item-description">Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="scene-container">
+
+            <div class="outer">
+                <div class="inner">
+                    <h2></h2>
+                    <div class="text-container">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="choices-container">
+            <div class="outer">
+                <div class="inner">
+                    <h3>What do you choose?</h3>
+                    <div class="input-container"></div>
+                    <div class="choice-container">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="stats-container">
+        <div class="outer">
+            <div class="inner">
+                <h4>Stats</h4>
+                <p>-- inDev</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
