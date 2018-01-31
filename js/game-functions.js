@@ -3,8 +3,9 @@
 /*
 * == INCLUDES ==
 * 1. BuildScene 
-* 2. Add to inventory
+* 2. render inventory
 * 3. load next scene (read choices)
+* 4. Render stats
 */
 
 //---------------------------------//
@@ -72,6 +73,7 @@ var BuildScene = function(scene) {
       );
     });
   }
+  renderStats(); // re-render stats every time a scene changes
 };
 
 // 2: Render inventory
@@ -139,3 +141,21 @@ $(document).on("click", ".choice", function(e) {
 
 //---------------------------------//
   
+// 4: Render stats
+var renderStats = function() {
+  var container = $("#stats-container .outer .inner");
+  container.find(".name").html(playerName);
+  container.find(".level-container").html("<h4>Level " + playerLevel + "</h4>");
+  container.find(".level-progress-container").html("<p>" + playerXp + " XP out of " + playerXpForNextLevel + " XP</p>");
+  container.find(".player-stats-container .player-stats.hp").html("<h4>HP: " + playerHealth + "</h4>");
+  if(playerBonusDamage > 0) {
+    container.find(".player-stats-container .player-stats.damage").html("<h4>Damage: " + playerBasicDamage + " (+ " + playerBonusDamage + " bonus)</h4>");
+  } else {
+    container.find(".player-stats-container .player-stats.damage").html("<h4>Damage: " + playerBasicDamage + "</h4>");  
+  }
+  container.find(".player-stats-container .player-stats.gold").html("<h4>Gold: " + playerGold + "</h4>");
+}
+
+//---------------------------------//
+
+renderStats(); // testing purposes
