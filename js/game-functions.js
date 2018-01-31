@@ -25,10 +25,30 @@ var BuildScene = function(scene) {
   inputContainer.html("");
   choicesContainer.html("");
 
+  var sceneText = [];
+  var sceneChoices = [];
+
+    // check if first visit exists in object
+    if(scene.hasOwnProperty('sceneFirstVisitCompare') == true && scene.sceneFirstVisitCompare == true) {
+      sceneText = scene.sceneTextFirstVisit;
+      sceneChoices = scene.sceneChoicesFirstVisit;
+
+      // flip bool to false -- location visited
+      scene.sceneFirstVisitCompare = false;
+    } else {
+      sceneText = scene.sceneText;
+      sceneChoices = scene.sceneChoices;
+    }
+
   // build scene story
   heading.html(scene.sceneName);
-  $.each(scene.sceneText, function(i, text) {
-    textContainer.append("<p>" + text + "</p>");
+  $.each(sceneText, function(i, text) {
+    if(text[0] == "-") {
+      text = text.substr(1);
+      textContainer.append("<p class='text-speech'>'' " + text + " ''</p>")
+    } else {
+      textContainer.append("<p>" + text + "</p>");
+    }
   });
 
   // Scene choices
@@ -46,7 +66,7 @@ var BuildScene = function(scene) {
     );
     // scene choices == choices (array)
   } else if ((sceneType = "choices")) {
-    $.each(scene.sceneChoices, function(i, choice) {
+    $.each(sceneChoices, function(i, choice) {
       choicesContainer.append(
         "<li class='choice " + i + "'><h4 class='" + i + "'>- " + choice + "</h4></li>"
       );
@@ -92,7 +112,6 @@ $(document).on("submit", ".choice-input", function(e) {
 
   $.each(classes, function(i, className) {
     // check for specific classes
-
     if (className == "set-player-name") {
       playerName = value;
     }
@@ -114,7 +133,6 @@ $(document).on("click", ".choice", function(e) {
     var sceneIndex = classes.slice(-1)[0];
     var sceneToDisplay = currentScene.sceneChoicesNextScene[sceneIndex];
     currentScene = sceneArray[sceneToDisplay];
-    console.log(sceneIndex);
     
     BuildScene(currentScene);
   });
