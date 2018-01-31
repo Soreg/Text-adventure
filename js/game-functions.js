@@ -157,5 +157,3 @@ var renderStats = function() {
 }
 
 //---------------------------------//
-
-renderStats(); // testing purposes
