@@ -157,6 +157,25 @@ p {
     right: 15px;
 }
 
-#stats-container .outer .inner h4 {
+#stats-container .outer .inner {
     text-align: center;
+}
+
+#stats-container .outer .inner>h4 {
+    border-bottom: 1px solid white;
+}
+
+#stats-container .stats-inner-container h4 {
+    margin: 15px 0;
+}
+
+#stats-container .stats-inner-container .name {
+    font-style: italic;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#stats-container .stats-inner-container .level-progress-container {
+    font-style: italic;
 }
