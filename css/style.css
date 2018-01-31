@@ -8,6 +8,7 @@
 body {
     background: url("../img/footer_lodyas.png");
     color: white;
+    overflow-x: hidden;
 }
 
 /* -- FONTS -- */
@@ -33,6 +34,14 @@ h4 {
 
 p {
     font-family: "Ubuntu";
+}
+
+/* -- GAME FONTS -- */
+
+.text-speech {
+    font-style: italic;
+    color: rgb(159, 215, 223);
+    
 }
 
 /* -- SHARED --*/
@@ -62,7 +71,7 @@ p {
 }
 
 #scene-container .outer {
-    width: 1200px;
+    width: 60%;
     margin-bottom: 60px;
     margin-top: 20px;
 }
@@ -80,7 +89,7 @@ p {
 /* -- CHOICES CONTAINER -- */
 
 #choices-container .outer {
-    width: 1200px;
+    width: 60%;
 }
 
 #choices-container .outer .inner h3 {
@@ -102,10 +111,9 @@ p {
 /* -- INVENTORY CONTAINER -- */
 
 #inventory-container .outer {
-    width: 250px;
+    width: 15%;
     position: absolute;
     z-index: 1;
-    top: 20px;
     left: 15px;
 }
 
@@ -143,7 +151,7 @@ p {
 /* -- STATS CONTAINER */
 
 #stats-container .outer {
-    width: 250px;
+    width: 15%;
     position: absolute;
     top: 20px;
     right: 15px;
