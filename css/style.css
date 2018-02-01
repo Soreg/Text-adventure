@@ -108,12 +108,69 @@ p {
     cursor: pointer;
 }
 
-/* -- SHOP EVENT CONTAINER -- */
+/* -- 1 EVENT CONTAINER -- */
+
+#shop-event-container {
+    display: none;
+}
 
 #shop-event-container .outer {
     width: 60%;
     margin-bottom: 60px;
     margin-top: 20px;
+}
+
+#shop-event-container .description-container {
+    margin-bottom: 20px;
+}
+
+#shop-event-container .shop-container {
+    border-top: 1px dashed;
+}
+
+#shop-event-container .shop-container ul {
+    margin-top: 20px;
+}
+
+#shop-event-container .shop-container ul li {
+    font-size: 20px;
+    list-style-type: none;
+    height: 40px;
+    line-height: 40px;
+    
+    /* disable highlighting */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Chrome + Opera */
+
+}
+
+#shop-event-container .shop-container ul li.shop-item-description {
+    background-color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 20px;
+}
+
+#shop-event-container .shop-container ul li.shop-item:nth-child(even) {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#shop-event-container .shop-container ul li.shop-item:nth-child(odd) {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#shop-event-container .shop-container ul li.shop-item:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+#shop-event-container .shop-container ul li div {
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+    height: 100%;
 }
 
 /* -- INVENTORY CONTAINER -- */
