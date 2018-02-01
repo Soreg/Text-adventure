@@ -204,7 +204,7 @@ var sceneArray = [Scene01, Scene02, Scene03, Scene04, Scene05, Scene06, Scene07,
 var ItemMinorHealthPotion = {
   name: "Minor health potion",
   description: "A minor healing potion - heals 10 hp",
-  specialStat: ["hp +10"],
+  specialStat: ["+10 hp"],
   value: "5"
 };
 
@@ -214,7 +214,7 @@ var ItemMinorHealthPotion = {
 var ItemHealthPotion = {
   name: "Health potion",
   description: "A healing potion - heals 25 hp",
-  specialStat: ["hp +25"],
+  specialStat: ["+25 hp"],
   value: "10"
 };
 
@@ -224,6 +224,6 @@ var ItemHealthPotion = {
 var ItemBigHealthPotion = {
   name: "Big health potion",
   description: "A big healing potion - heals 50 hp",
-  specialStat: ["hp +50"],
+  specialStat: ["+50 hp"],
   value: "25"
 };
