@@ -153,8 +153,8 @@ p {
 #stats-container .outer {
     width: 15%;
     position: absolute;
-    top: 20px;
-    right: 15px;
+    top: 0;
+    right: 30px;
 }
 
 #stats-container .outer .inner {
