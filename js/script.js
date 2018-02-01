@@ -11,6 +11,7 @@ var mainChurchName = "Alkarath";
 
 // Misc variables
 var vendorInfluence = 0; // Based on level
+var NimbaShopItems = [];
 
 // Game-function variables -- Used by game engine
 var currentScene = Scene01;

@@ -134,7 +134,16 @@ $(document).on("click", ".choice", function(e) {
     // next scene
     var sceneIndex = classes.slice(-1)[0];
     var sceneToDisplay = currentScene.sceneChoicesNextScene[sceneIndex];
-    currentScene = sceneArray[sceneToDisplay];
+    if(isNaN(sceneToDisplay)) {
+      // fire event (return to previous scene when done)
+      var i = sceneToDisplay.split("")[1];
+      var event = currentScene.sceneSpecialEvents[i];
+      event();
+    } else {
+      // build next scene
+      currentScene = sceneArray[sceneToDisplay];
+    }
+    console.log(currentScene);
     
     BuildScene(currentScene);
   });

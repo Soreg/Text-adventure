@@ -133,8 +133,9 @@ var Scene05 = {
   sceneText: ["-Hello there! How can I help you?"],
   sceneType: "choices",
   sceneChoicesHeadline:"Options",
+  sceneSpecialEvents: [ShopBuyEvent, ShopSellEvent],
   sceneChoices: ["Buy", "Sell", "Back to city"],
-  sceneChoicesNextScene: [2, 2, 2]
+  sceneChoicesNextScene: ["e0", "e1", 2]
 };
 
 // 6: Scene06 - Inn
