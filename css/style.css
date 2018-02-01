@@ -108,6 +108,14 @@ p {
     cursor: pointer;
 }
 
+/* -- SHOP EVENT CONTAINER -- */
+
+#shop-event-container .outer {
+    width: 60%;
+    margin-bottom: 60px;
+    margin-top: 20px;
+}
+
 /* -- INVENTORY CONTAINER -- */
 
 #inventory-container .outer {
