@@ -143,7 +143,6 @@ $(document).on("click", ".choice", function(e) {
       // build next scene
       currentScene = sceneArray[sceneToDisplay];
     }
-    console.log(currentScene);
     
     BuildScene(currentScene);
   });
