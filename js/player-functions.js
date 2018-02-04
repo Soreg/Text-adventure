@@ -31,6 +31,10 @@ var AddToInventory = function(items) {
 }
 
 // 2: Remove from inventory
-var RemoveFromInventory = function(item) {
-    
+var RemoveFromInventory = function(items) {
+    $.each(items, function(i, item) {
+        playerInventory.splice($.inArray(item, playerInventory), 1);
+    });
+    renderInventory();
+    console.log(playerInventory);
 }
