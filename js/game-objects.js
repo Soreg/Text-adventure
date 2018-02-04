@@ -135,7 +135,7 @@ var Scene05 = {
   sceneChoicesHeadline:"Options",
   sceneSpecialEvents: [ShopBuyEvent, ShopSellEvent],
   sceneChoices: ["Buy", "Sell", "Back to city"],
-  sceneChoicesNextScene: ["e0", "e1", 2]
+  sceneChoicesNextScene: ["e0", "e0", 2]
 };
 
 // 6: Scene06 - Inn
