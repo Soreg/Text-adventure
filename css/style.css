@@ -180,6 +180,7 @@ p {
 #shop-event-container .shop-container .action-container {
     display: inline-block;
     width: 8%;
+    height: 40px;
 }
 
 #shop-event-container .shop-container .action-container p {
@@ -232,6 +233,25 @@ p {
 
 #shop-event-container .shop-choices .disabled:hover {
     background: none;
+    cursor: default;
+}
+
+#shop-event-container .sell-event {
+    border: 1px solid lightgrey;
+}
+
+#shop-event-container .sell-event:hover {
+    cursor: pointer;
+    background: rgba(241, 230, 64, 0.904);
+    color: rgb(0, 0, 0);
+}
+
+#shop-event-container .sell-event .disabled {
+    color: grey;
+}
+
+#shop-event-container .sell-event:hover .disabled {
+    background: none !important;
     cursor: default;
 }
 
