@@ -36,8 +36,6 @@
 * 3: Big health potion
 * 4: Magicka potion
 * 5: Stamina potion
-* 6: Nijar's Sword
-* 7: Lontar's Great Sword
 */
 
 //===================================//
@@ -252,22 +250,3 @@ var ItemStaminaPotion = {
 
 //---------------------------------//
 
-// 6: Nijar's Sword
-var ItemNijarSword = {
-  name: "Sword of Nijar",
-  description: "The sword of Nijar - powerful one-handed weapon",
-  specialStat: ["+20 damage"],
-  value: "30"
-};
-
-//---------------------------------//
-
-// 7: Lontar's Great Sword
-var ItemLontarGreatSword = {
-  name: "Lontar's great sword",
-  description: "Lontar's great sword - strike hard",
-  specialStat: ["+50 damage"],
-  value: "55"
-};
-
-//---------------------------------//
