@@ -203,6 +203,7 @@ var sceneArray = [Scene01, Scene02, Scene03, Scene04, Scene05, Scene06, Scene07,
 // 1: Minor health potion
 var ItemMinorHealthPotion = {
   name: "Minor health potion",
+  id: "smHpPotion",
   description: "A minor healing potion - heals 10 hp",
   specialStat: ["+10 hp"],
   value: "5"
@@ -213,6 +214,7 @@ var ItemMinorHealthPotion = {
 // 2: Health potion
 var ItemHealthPotion = {
   name: "Health potion",
+  id: "hpPotion",
   description: "A healing potion - heals 25 hp",
   specialStat: ["+25 hp"],
   value: "10"
@@ -223,6 +225,7 @@ var ItemHealthPotion = {
 // 3: Big health potion
 var ItemBigHealthPotion = {
   name: "Big health potion",
+  id: "lgHpPotion",
   description: "A big healing potion - heals 50 hp",
   specialStat: ["+50 hp"],
   value: "25"
@@ -233,6 +236,7 @@ var ItemBigHealthPotion = {
 // 4: Magicka potion
 var ItemMagickaPotion = {
   name: "Magicka potion",
+  id: "magPotion",
   description: "A magicka potion - Gives +25 magicka",
   specialStat: ["+25 magicka"],
   value: "10"
@@ -243,6 +247,7 @@ var ItemMagickaPotion = {
 // 5: Stamina potion
 var ItemStaminaPotion = {
   name: "Stamina potion",
+  id: "staPotion",
   description: "A stamina potion - Gives +25 stamina",
   specialStat: ["+25 stamina"],
   value: "8"

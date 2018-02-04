@@ -80,15 +80,28 @@ var BuildScene = function(scene) {
 var renderInventory = function() {
   var container = $("#inventory-container ul");
   container.html("");
+
   $.each(playerInventory, function(i, item) {
-    container.append(
-      "<li class='inventory-element " + i + "'>" + item.name + "</li>"
-    );
+    var itemClass = "." + item.id;
+    if($("#inventory-container ul " + itemClass).length) { // if inventory-html already contains this item..
+      var child = $("#inventory-container ul " + itemClass);
+      var childVal = child.children("span").text();
+
+      childVal++;
+      child.children("span").html(childVal);
+      child.children("span").css("display", "inline");
+    }
+    else {
+      container.append(
+        "<li class='inventory-element " + i + " " + item.id + "'>" + item.name + "<span>1</span></li>"
+      );
+    }
   });
 
   // Add description on hover
   $(".inventory-element").hover(function(e) {
-    var i = e.target.className.split(" ")[1];
+    var classNames = e.target.className.split(" ");
+    var i = classNames[1];
     var descP = $(".inventory-item-description");
     var desc = playerInventory[i].description;
 

@@ -252,12 +252,18 @@ p {
 
 #inventory-container ul {
     list-style-type: none;
-    text-align: center;
+    text-align: left;
 }
 
 #inventory-container ul li {
     font-size: 20px;
     padding: 10px 0;
+}
+
+#inventory-container ul li > span {
+    float: right;
+    margin-right: 10px;
+    display: none;
 }
 
 #inventory-container ul li:hover {
