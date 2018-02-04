@@ -59,23 +59,37 @@
 
         <!-- Shop container -->
         <div id="shop-event-container">
-            <div class="outer">
-                <div class="inner">
-                    <div class="description-container">
-                        <h4></h4>
+            <div class="shop">
+                <div class="outer">
+                    <div class="inner">
+                        <div class="description-container">
+                            <h4></h4>
+                        </div>
+                        <div class="shop-container">
+                            <ul>
+                                <li class="shop-item-description">
+                                    <div>ITEM</div>
+                                    <div>STATS</div>
+                                    <div>PRICE</div>
+                                    <div class="player-gold"></div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="shop-container">
-                        <ul>
-                            <li class="shop-item-description">
-                                <div>ITEM</div>
-                                <div>STATS</div>
-                                <div>PRICE</div>
-                            </li>
-                        </ul>
+                </div>
+            </div>
+
+            <div class="shop-choices">
+                <div class="outer">
+                    <div class="inner">
+                        <div class="buy-items button-choice disabled">Buy</div>
+                        <div class="cancel-items button-choice">Go back</div>
                     </div>
                 </div>
             </div>
         </div>
+
+        
         <!-- End of shop container -->
 
         <!-- Stats container -->
@@ -104,10 +118,10 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
-    <script src="js/game-events.js"></script>
     <script src="js/player-functions.js"></script>
-    <script src="js/game-objects.js"></script>
     <script src="js/game-functions.js"></script>
+    <script src="js/game-events.js"></script>
+    <script src="js/game-objects.js"></script>
     <script src="js/script.js"></script>
 </body>
 

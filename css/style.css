@@ -153,6 +153,12 @@ p {
     margin-bottom: 20px;
 }
 
+#shop-event-container .shop-container ul li .player-gold {
+    width: 14%;
+    text-align: left;
+    color: lightgreen;
+}
+
 #shop-event-container .shop-container ul li.shop-item:nth-child(even) {
     background: rgba(0, 0, 0, 0.3);
 }
@@ -162,15 +168,71 @@ p {
 }
 
 #shop-event-container .shop-container ul li.shop-item:hover {
-    cursor: pointer;
     background: rgba(0, 0, 0, 0.8);
 }
 
-#shop-event-container .shop-container ul li div {
+#shop-event-container .shop-container ul li>div {
     display: inline-block;
-    width: 33%;
+    width: 28%;
     text-align: center;
-    height: 100%;
+}
+
+#shop-event-container .shop-container .action-container {
+    display: inline-block;
+    width: 8%;
+}
+
+#shop-event-container .shop-container .action-container p {
+    display: inline;
+    margin: 0 5px;
+}
+
+#shop-event-container .shop-container .action-container .increase, #shop-event-container .shop-container .action-container .decrease {
+    display: inline;
+    cursor: pointer;
+    padding: 0 5px;
+    font-weight: bold;
+    text-align: center;    
+}
+
+#shop-event-container .shop-container ul li.shop-item:hover .increase {
+    color: lightgreen;
+}
+
+#shop-event-container .shop-container ul li.shop-item:hover .decrease {
+    color: red;
+}
+
+#shop-event-container .shop-choices .inner {
+    overflow: hidden;
+}
+
+#shop-event-container .shop-choices .button-choice {
+    font-size: 24px;
+    border: 1px solid grey;
+    display: block;
+    padding: 15px;
+    text-align: center;
+    margin: auto;
+    width: 200px;
+}
+
+#shop-event-container .shop-choices .button-choice:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#shop-event-container .shop-choices .buy-items {
+    margin-bottom: 20px;
+}
+
+#shop-event-container .shop-choices .disabled {
+    color: grey;
+}
+
+#shop-event-container .shop-choices .disabled:hover {
+    background: none;
+    cursor: default;
 }
 
 /* -- INVENTORY CONTAINER -- */
@@ -200,6 +262,7 @@ p {
 
 #inventory-container ul li:hover {
     background: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
 }
 
 #inventory-container .description-container {
