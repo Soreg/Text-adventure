@@ -235,7 +235,7 @@ var ItemBigHealthPotion = {
 // 4: Magicka potion
 var ItemMagickaPotion = {
   name: "Magicka potion",
-  description: "A big healing potion - heals 50 hp",
+  description: "A magicka potion - Gives +25 magicka",
   specialStat: ["+25 magicka"],
   value: "10"
 };
@@ -245,7 +245,7 @@ var ItemMagickaPotion = {
 // 5: Stamina potion
 var ItemStaminaPotion = {
   name: "Stamina potion",
-  description: "A big healing potion - heals 50 hp",
+  description: "A stamina potion - Gives +25 stamina",
   specialStat: ["+25 stamina"],
   value: "8"
 };
