@@ -141,7 +141,6 @@ $(document).on("submit", ".choice-input", function(e) {
 // on click (choices)
 $(document).on("click", ".choice", function(e) {
     var classes = e.target.className.split(" ");
-    var value = $(".input").val();
   
     e.preventDefault();
     // next scene
@@ -151,7 +150,11 @@ $(document).on("click", ".choice", function(e) {
       // fire event (return to previous scene when done)
       var i = sceneToDisplay.split("")[1];
       var event = currentScene.sceneSpecialEvents[i];
-      event();
+
+      var value = $(this).text().split(" ")[1];
+
+      event(value);
+
     } else {
       // build next scene
       currentScene = sceneArray[sceneToDisplay];
