@@ -4,7 +4,7 @@
 * == INCLUDES ==
 * -- Scenes -- (Section, large)
 * -- Items (Section, large)
-*
+* -- Monsters (Section, Large)
 *
 *
 */
@@ -23,7 +23,6 @@
 * 7: Forest
 * 8: Holy keep
 * 9: Prayer room
-*
 */
 
 //---------------------------------//
@@ -37,6 +36,20 @@
 * 4: Magicka potion
 * 5: Stamina potion
 */
+
+//---------------------------------//
+
+/* -- MONSTERS -- */
+
+/*
+* 1: Trek (lvl 1-5)
+* 2: Trukit (lvl 1-5)
+* 3: Chaba (lvl 1-5)
+* 4: Katar (lvl 1-5)
+* 5: Beshy (lvl 1-5)
+*/
+
+//---------------------------------//
 
 //===================================//
 //===================================//
