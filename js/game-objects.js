@@ -60,10 +60,6 @@ var nimbaFirstVisit = true, alkarathFirstVisit = true, nimbaForestFirstVisit = t
 
 /* === SCENES === */
 
-
-
-
-
 //1: Scene01 - Intro scene
 var Scene01 = {
   sceneName: "Welcome, Adventurer",
@@ -81,19 +77,23 @@ var Scene01 = {
   sceneChoicesNextScene: [1]
 };
 
+//--------------------------------------------------------------------//
+
 // 2: Scene02 - Choose Initial Route
 var Scene02 = {
-    sceneName: "A splitting path",
-    sceneText: [
-      "You venture down the path of adventure, and suddenly it splits in two.",
-      "You read the roadsigns. The left path goes to Church of Alkarath, while the right goes to the city of Nimba.",
-    ],
-    sceneType: "choices",
-    sceneChoicesHeadline: "Which path do you choose",
-    sceneChoices: ["I go left, to the church of Alkarath", "I go right, to the city of Nimba"],
-    functionClass: "set-player-name",
-    sceneChoicesNextScene: [3, 2]
-  };
+  sceneName: "A splitting path",
+  sceneText: [
+    "You venture down the path of adventure, and suddenly it splits in two.",
+    "You read the roadsigns. The left path goes to Church of Alkarath, while the right goes to the city of Nimba.",
+  ],
+  sceneType: "choices",
+  sceneChoicesHeadline: "Which path do you choose",
+  sceneChoices: ["I go left, to the church of Alkarath", "I go right, to the city of Nimba"],
+  functionClass: "set-player-name",
+  sceneChoicesNextScene: [3, 2]
+};
+
+  //--------------------------------------------------------------------//
 
 // 3: Scene03 - City
 var Scene03 = {
@@ -118,6 +118,8 @@ var Scene03 = {
   sceneChoicesNextScene: [4, 5, 6, 3]
 };
 
+//--------------------------------------------------------------------//
+
 // 4: Scene04 - Church
 var Scene04 = {
   sceneName: "The Church of Alkarath",
@@ -140,6 +142,8 @@ var Scene04 = {
   sceneChoicesNextScene: [8, 7, 6, 2]
 };
 
+//--------------------------------------------------------------------//
+
 // 5: Scene05 - Shop
 var Scene05 = {
   sceneName: "The Nimba Shop",
@@ -151,6 +155,8 @@ var Scene05 = {
   sceneChoicesNextScene: ["e0", "e0", 2]
 };
 
+//--------------------------------------------------------------------//
+
 // 6: Scene06 - Inn
 var Scene06 = {
   sceneName: "Nimba Inn",
@@ -160,6 +166,8 @@ var Scene06 = {
   sceneChoices: ["Yes (restore full stamina) (-10 gold)", "No, back to city"],
   sceneChoicesNextScene: [2, 2]
 };
+
+//--------------------------------------------------------------------//
 
 // 7: Scene07 -  Forest
 var Scene07 = {
@@ -185,6 +193,8 @@ var Scene07 = {
   sceneChoicesNextScene: ["event", 2, 3]
 };
 
+//--------------------------------------------------------------------//
+
 // 8: Scene08 - Holy Keep
 var Scene08 = {
   sceneName: "Holy Keep of Alkarath",
@@ -195,6 +205,8 @@ var Scene08 = {
   sceneChoicesNextScene: [2, 3]
 };
 
+//--------------------------------------------------------------------//
+
 // 9: Scene09 - Prayer Room
 var Scene09 = {
   sceneName: "Holy Keep of Alkarath",
@@ -204,6 +216,8 @@ var Scene09 = {
   sceneChoices: ["Nimba", "Church"],
   sceneChoicesNextScene: [2, 3]
 };
+
+//--------------------------------------------------------------------//
 
 //*====== END OF SCENES ====== */
 
@@ -267,4 +281,74 @@ var ItemStaminaPotion = {
 };
 
 //---------------------------------//
+
+//*====== END OF ITEMS ====== */
+
+
+/* === MONSTERS === */
+// - HitChange: % (100 = always, 0 = never)
+
+// 1: Trek (lvl 1-5)
+var MonsterTrek = {
+  name: "Trek",
+  id: "trek01",
+  showsAtLevel: [1, 20],
+  description: "A tree-monster - Slow, but hits hard",
+  damageRange: [0, 20],
+  hitChange: 25
+};
+
+//---------------------------------//
+
+// 2: Trukit (lvl 1-5)
+var MonsterTrukit = {
+  name: "Trukit",
+  id: "trukit01",
+  showsAtLevel: [1, 10],
+  description: "A tree-monster - Hits often, but low damage",
+  damageRange: [0, 5],
+  hitChange: 90
+};
+
+//---------------------------------//
+
+// 3: Chaba (lvl 1-5)
+var MonsterChaba = {
+  name: "Chaba",
+  id: "chaba01",
+  showsAtLevel: [1, 15],
+  description: "A chaba - An aggressive monster",
+  damageRange: [0, 15],
+  hitChange: 25
+};
+
+//---------------------------------//
+
+// 4: Katar (lvl 1-5)
+var MonsterKatar = {
+  name: "Katar",
+  id: "katar01",
+  showsAtLevel: [1, 5],
+  description: "With razor-sharp teeth, this monster will bite everything he sees!",
+  damageRange: [0, 10],
+  hitChange: 25
+};
+
+//---------------------------------//
+
+// 5: Beshy (lvl 1-5)
+var MonsterBeshy = {
+  name: "Beshy",
+  id: "beshy01",
+  showsAtLevel: [1, 3],
+  description: "A monster in a bush - Doesn't seem friendly",
+  damageRange: [0, 8],
+  hitChange: 25
+};
+
+//---------------------------------//
+
+// monster arrays
+var WildMonsterArray = [MonsterTrek, MonsterTrukit, MonsterChaba, MonsterKatar, MonsterBeshy];
+
 
