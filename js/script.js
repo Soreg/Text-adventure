@@ -16,7 +16,7 @@ var NimbaShopItems = [ItemMinorHealthPotion, ItemHealthPotion, ItemBigHealthPoti
 // Game-function variables -- Used by game engine
 var currentScene = Scene01;
 
+// Build monster array
+BuildMonsterArray();
 // Start game with intro scene
 BuildScene(Scene01);
-// test
-AddToInventory(ItemBigHealthPotion);

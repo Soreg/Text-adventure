@@ -349,6 +349,4 @@ var MonsterBeshy = {
 //---------------------------------//
 
 // monster arrays
-var WildMonsterArray = [MonsterTrek, MonsterTrukit, MonsterChaba, MonsterKatar, MonsterBeshy];
-
-
+var wildMonsterArray = [MonsterTrek, MonsterTrukit, MonsterChaba, MonsterKatar, MonsterBeshy];
