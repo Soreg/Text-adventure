@@ -39,7 +39,6 @@ var RemoveFromInventory = function(items) {
         playerInventory.splice($.inArray(item, playerInventory), 1);
     });
     renderInventory();
-    console.log(playerInventory);
 }
 
 // 3: Build monster array
@@ -50,5 +49,4 @@ var BuildMonsterArray = function() {
             console.log("Add to array");
         }
     })
-    console.log(wildMonsterArray);
 }
