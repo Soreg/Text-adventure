@@ -43,7 +43,6 @@ var RemoveFromInventory = function(items) {
 
 // 3: Build monster array
 var BuildMonsterArray = function() {
-    console.log(playerLevel);
     $.each(wildMonsterArray, function(i, monster) {
         if(playerLevel >= monster.showsAtLevel[0] && playerLevel < monster.showsAtLevel[1]) {
             playerWildMonsterArray.push(monster);
