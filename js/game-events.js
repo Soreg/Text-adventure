@@ -246,6 +246,14 @@ var CompareGoldToItems = function() {
 var RandomMonsterEncounter = function() {
     var monster = GetRandomMonster();
 
+    var testrun = 0;
+
+    // new variables to avoid overwriting monster objects
+    var monsterHealth = monster.monsterHealth;
+    var monsterDmgRange = [monster.damageRange[0], monster.damageRange[1]];
+    var monsterHitChance = monster.hitChance;
+    var monsterPlayerEscapeChance = monster.playerEscapeChace;
+
     var playerFled = false;
     var playerOk = false;
 
@@ -255,34 +263,34 @@ var RandomMonsterEncounter = function() {
     mainContainer.css("display", "block");
 
     // List monster details
-    mainContainer.find(".headline").html("You encountered a monster!");
-    mainContainer.find(".monster-name").html("Monster: " + monster.name);
-    mainContainer.find(".monster-description").html("Description: " + monster.description);
-    mainContainer.find(".monster-hp").html("Monster HP: " + monster.monsterHealth);
-    mainContainer.find(".monster-damage").html("Damage range: " + monster.damageRange[0] + " - " + monster.damageRange[1]);
-    mainContainer.find(".monster-hit-chance").html("hit-chance: " + monster.hitChance + "%");
-
-    // start game with monster's turn
+    var RenderMonsterStats = function() {
+        mainContainer.find(".headline").html("You encountered a monster!");
+        mainContainer.find(".monster-name").html("Monster: " + monster.name);
+        mainContainer.find(".monster-description").html("Description: " + monster.description);
+        mainContainer.find(".monster-hp").html("Monster HP: " + monsterHealth);
+        mainContainer.find(".monster-damage").html("Damage range: " + monsterDmgRange[0] + " - " + monsterDmgRange[1]);
+        mainContainer.find(".monster-hit-chance").html("hit-chance: " + monsterHitChance + "%");
+    }
 
     // -- MONSTER TURN --
     var monsterTurn = function() {
-        mainContainer.find(".battle-choices").css("display", "none"); // change this to buttons being disabled
+        mainContainer.find(".battle-choices").css("display", "none");
         mainContainer.find(".turn").html(monster.name + "'s turn");
         mainContainer.find(".move").html(monster.name + " is considering his attack . . .");
+        mainContainer.find(".effect").html("");
         var monsterHit = DidMonsterHit(monster);
         setTimeout(function() {
             if(monsterHit) {
-                var monsterDamage = GetMonsterAttack();
-                playerHealth -= monsterDamage;
+                var monsterTurnDamage = GetMonsterAttack();
+                playerHealth -= monsterTurnDamage;
                 renderStats();
                 mainContainer.find(".move").html(monster.name + " strikes hard!");
-                mainContainer.find(".effect").html("It damaged for " + monsterDamage + " HP!");
+                mainContainer.find(".effect").html("It damaged for " + monsterTurnDamage + " HP!");
             }
             else {
                 mainContainer.find(".move").html(monster.name + " missed his attack!");
             }
-            console.log(monsterHit);
-            playerTurn();
+    playerTurn();
     }, 3000);
     }
 
@@ -290,16 +298,24 @@ var RandomMonsterEncounter = function() {
     var playerTurn = function() {
         mainContainer.find(".battle-choices").css("display", "block");
 
-        $(".battle-attack").click(function() {
+        $(".battle-attack").unbind().click(function() {
+            mainContainer.find(".battle-choices").css("display", "none");
             var playerRoundDamage = GetPlayerAttack();
-            console.log(playerRoundDamage);
-            // minus monster hp
-            // check if monster is dead
-            // if not, timeout, and then monster's turn
-            // if dead, go to win-function
+            monsterHealth -= playerRoundDamage;
+            RenderMonsterStats();
+            mainContainer.find(".turn").html("");
+            mainContainer.find(".move").html("You hit the target!");
+            mainContainer.find(".effect").html("You damaged the monster for " + playerRoundDamage + " HP!");
+            if(monsterHealth <= 0) {
+                mainContainer.find(".fatal").html("YOU KILLED THE MONSTER!");
+            } else {
+                setTimeout(function() {
+                    monsterTurn();
+                }, 3000);
+            }
         });
 
-        $(".battle-run").click(function() {
+        $(".battle-run").unbind().click(function() {
             console.log("Player is running");
         });
     }
@@ -309,6 +325,8 @@ var RandomMonsterEncounter = function() {
         return damage;
     }
 
+    // start turn with monster
+    RenderMonsterStats();
     monsterTurn();
     
     // display remaining monster HP
