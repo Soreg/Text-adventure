@@ -6,6 +6,8 @@
 * 2. render inventory
 * 3. load next scene (read choices)
 * 4. Render stats
+* 5. Get monster attack (dmg)
+* 6. Did monster hit (bool)
 */
 
 //---------------------------------//
@@ -191,4 +193,17 @@ var GetRandomMonster = function() {
     )
   ];
   return monster;
+}
+
+// 6: Did monster hit 
+var DidMonsterHit = function(monster) {
+  var hit = false;
+  var roll = Math.random();
+  if(roll > monster.hitChance) {
+    hit = true;
+  }
+  else {
+    hit = false;
+  }
+  return hit;
 }
