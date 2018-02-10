@@ -289,51 +289,51 @@ var ItemStaminaPotion = {
 /* === MONSTERS === */
 // - HitChange: % (100 = always, 0 = never)
 
-// 1: Trek (lvl 1-5)
+// 1: Trek (lvl 1-20)
 var MonsterTrek = {
   name: "Trek",
   id: "trek01",
   monsterHealth: 20,
   showsAtLevel: [1, 20],
   description: "A tree-monster - Slow, but hits hard",
-  damageRange: [0, 20],
+  damageRange: [5, 20],
   hitChance: 0.25,
   playerEscapeChance: 0.5,
-  xpGained: 15,
+  xpGained: 25,
   goldToGive: 5,
   goldToTake: 10
 };
 
 //---------------------------------//
 
-// 2: Trukit (lvl 1-5)
+// 2: Trukit (lvl 1-10)
 var MonsterTrukit = {
   name: "Trukit",
   id: "trukit01",
   monsterHealth: 20,
   showsAtLevel: [1, 10],
   description: "A tree-monster - Hits often, but low damage",
-  damageRange: [0, 5],
+  damageRange: [1, 5],
   hitChance: 0.9,
   playerEscapeChance: 0.5,
-  xpGained: 15,
+  xpGained: 5,
   goldToGive: 5,
   goldToTake: 10
 };
 
 //---------------------------------//
 
-// 3: Chaba (lvl 1-5)
+// 3: Chaba (lvl 1-15)
 var MonsterChaba = {
   name: "Chaba",
   id: "chaba01",
   monsterHealth: 50,
   showsAtLevel: [1, 15],
   description: "A chaba - An aggressive monster",
-  damageRange: [0, 15],
+  damageRange: [5, 15],
   hitChance: 0.75,
   playerEscapeChance: 0.5,
-  xpGained: 15,
+  xpGained: 8,
   goldToGive: 5,
   goldToTake: 10
 };
@@ -347,27 +347,27 @@ var MonsterKatar = {
   monsterHealth: 50,
   showsAtLevel: [1, 5],
   description: "With razor-sharp teeth, this monster will bite everything he sees!",
-  damageRange: [0, 10],
+  damageRange: [2, 10],
   hitChance: 0.75,
   playerEscapeChance: 0.5,
-  xpGained: 15,
+  xpGained: 5,
   goldToGive: 5,
   goldToTake: 10
 };
 
 //---------------------------------//
 
-// 5: Beshy (lvl 1-5)
+// 5: Beshy (lvl 1-3)
 var MonsterBeshy = {
   name: "Beshy",
   id: "beshy01",
   monsterHealth: 50,
   showsAtLevel: [1, 3],
   description: "A monster in a bush - Doesn't seem friendly",
-  damageRange: [0, 8],
+  damageRange: [1, 8],
   hitChance: 0.75,
   playerEscapeChance: 0.5,
-  xpGained: 15,
+  xpGained: 10,
   goldToGive: 5,
   goldToTake: 10
 };
