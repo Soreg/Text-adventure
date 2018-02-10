@@ -264,24 +264,44 @@ var RandomMonsterEncounter = function() {
 
     // start game with monster's turn
 
-    // monster's turn function
+    // -- MONSTER TURN --
     var monsterTurn = function() {
         mainContainer.find(".battle-choices").css("display", "none"); // change this to buttons being disabled
         mainContainer.find(".turn").html(monster.name + "'s turn");
         mainContainer.find(".move").html(monster.name + " is considering his attack . . .");
-        var monsterDamage = GetMonsterAttack();
+        var monsterHit = DidMonsterHit(monster);
         setTimeout(function() {
-            playerHealth -= monsterDamage;
-            renderStats();
-            mainContainer.find(".move").html(monster.name + " strikes hard!");
-            mainContainer.find(".effect").html("It damaged for " + monsterDamage + " HP!")
+            if(monsterHit) {
+                var monsterDamage = GetMonsterAttack();
+                playerHealth -= monsterDamage;
+                renderStats();
+                mainContainer.find(".move").html(monster.name + " strikes hard!");
+                mainContainer.find(".effect").html("It damaged for " + monsterDamage + " HP!");
+            }
+            else {
+                mainContainer.find(".move").html(monster.name + " missed his attack!");
+            }
+            console.log(monsterHit);
             playerTurn();
     }, 3000);
     }
 
-    // player's turn function
+    // -- PLAYER TURN --
     var playerTurn = function() {
         mainContainer.find(".battle-choices").css("display", "block");
+
+        $(".battle-attack").click(function() {
+            var playerRoundDamage = GetPlayerAttack();
+            console.log(playerRoundDamage);
+            // minus monster hp
+            // check if monster is dead
+            // if not, timeout, and then monster's turn
+            // if dead, go to win-function
+        });
+
+        $(".battle-run").click(function() {
+            console.log("Player is running");
+        });
     }
 
     var GetMonsterAttack = function() {
