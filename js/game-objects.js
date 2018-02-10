@@ -297,7 +297,7 @@ var MonsterTrek = {
   showsAtLevel: [1, 20],
   description: "A tree-monster - Slow, but hits hard",
   damageRange: [0, 20],
-  hitChance: 25,
+  hitChance: 0.25,
   playerEscapeChance: 50
 };
 
@@ -311,7 +311,7 @@ var MonsterTrukit = {
   showsAtLevel: [1, 10],
   description: "A tree-monster - Hits often, but low damage",
   damageRange: [0, 5],
-  hitChance: 90,
+  hitChance: 0.9,
   playerEscapeChance: 50
 };
 
@@ -325,7 +325,7 @@ var MonsterChaba = {
   showsAtLevel: [1, 15],
   description: "A chaba - An aggressive monster",
   damageRange: [0, 15],
-  hitChance: 75,
+  hitChance: 0.75,
   playerEscapeChance: 50
 };
 
@@ -339,7 +339,7 @@ var MonsterKatar = {
   showsAtLevel: [1, 5],
   description: "With razor-sharp teeth, this monster will bite everything he sees!",
   damageRange: [0, 10],
-  hitChance: 75,
+  hitChance: 0.75,
   playerEscapeChance: 50
 };
 
@@ -353,7 +353,7 @@ var MonsterBeshy = {
   showsAtLevel: [1, 3],
   description: "A monster in a bush - Doesn't seem friendly",
   damageRange: [0, 8],
-  hitChance: 75,
+  hitChance: 0.75,
   playerEscapeChance: 50
 };
 
