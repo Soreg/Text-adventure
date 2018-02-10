@@ -202,7 +202,7 @@ var GetRandomMonster = function() {
 var DidMonsterHit = function(monster) {
   var hit = false;
   var roll = Math.random();
-  if(roll > monster.hitChance) {
+  if(roll < monster.hitChance) {
     hit = true;
   }
   else {
