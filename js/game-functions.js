@@ -8,6 +8,7 @@
 * 4. Render stats
 * 5. Get monster attack (dmg)
 * 6. Did monster hit (bool)
+* 7. Get player attack
 */
 
 //---------------------------------//
@@ -195,6 +196,8 @@ var GetRandomMonster = function() {
   return monster;
 }
 
+//---------------------------------//
+
 // 6: Did monster hit 
 var DidMonsterHit = function(monster) {
   var hit = false;
@@ -207,3 +210,16 @@ var DidMonsterHit = function(monster) {
   }
   return hit;
 }
+
+//---------------------------------//
+
+// 7: Get player attack
+var GetPlayerAttack = function() {
+  var playerMinDmg = (playerBasicDamage + playerBonusDamage) - 4;
+  var playerMaxDmg = (playerBasicDamage + playerBonusDamage) + 4;
+
+  var damage = Math.floor(Math.random() * (playerMaxDmg - playerMinDmg + 1)) + playerMinDmg;
+  return damage;
+}
+
+//---------------------------------//
