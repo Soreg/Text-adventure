@@ -46,7 +46,7 @@ var BuildMonsterArray = function() {
     console.log(playerLevel);
     $.each(wildMonsterArray, function(i, monster) {
         if(playerLevel >= monster.showsAtLevel[0] && playerLevel < monster.showsAtLevel[1]) {
-            console.log("Add to array");
+            playerWildMonsterArray.push(monster);
         }
     })
 }

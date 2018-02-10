@@ -5,9 +5,8 @@
 * == INCLUDES ==
 * 1. Shop (buy) 
 * 2. Compare gold to items (check if can buy)
-* 3. Shop (sell)
-* 4. Monster fights
-* 5. Boss fights
+* 3. Monster fights
+* 4. Boss fights
 */
 
 //---------------------------------//
@@ -243,5 +242,83 @@ var CompareGoldToItems = function() {
     return totalValue;
 }
 
-var ShopSellEvent = function() {
+// 3: Monster fights (random encounters)
+var RandomMonsterEncounter = function() {
+    var monster = GetRandomMonster();
+
+    var playerFled = false;
+    var playerOk = false;
+
+    var mainContainer = $("#battle-event-container");
+
+    $("#scene-outer-container").css("display", "none");
+    mainContainer.css("display", "block");
+
+    // List monster details
+    mainContainer.find(".headline").html("You encountered a monster!");
+    mainContainer.find(".monster-name").html("Monster: " + monster.name);
+    mainContainer.find(".monster-description").html("Description: " + monster.description);
+    mainContainer.find(".monster-hp").html("Monster HP: " + monster.monsterHealth);
+    mainContainer.find(".monster-damage").html("Damage range: " + monster.damageRange[0] + " - " + monster.damageRange[1]);
+    mainContainer.find(".monster-hit-chance").html("hit-chance: " + monster.hitChance + "%");
+
+    // start game with monster's turn
+
+    // monster's turn function
+    var monsterTurn = function() {
+        mainContainer.find(".battle-choices").css("display", "none"); // change this to buttons being disabled
+        mainContainer.find(".turn").html(monster.name + "'s turn");
+        mainContainer.find(".move").html(monster.name + " is considering his attack . . .");
+        var monsterDamage = GetMonsterAttack();
+        setTimeout(function() {
+            playerHealth -= monsterDamage;
+            renderStats();
+            mainContainer.find(".move").html(monster.name + " strikes hard!");
+            mainContainer.find(".effect").html("It damaged for " + monsterDamage + " HP!")
+            playerTurn();
+    }, 3000);
+    }
+
+    // player's turn function
+    var playerTurn = function() {
+        mainContainer.find(".battle-choices").css("display", "block");
+    }
+
+    var GetMonsterAttack = function() {
+        var damage = Math.floor(Math.random() * monster.damageRange[1]) + monster.damageRange[0];
+        return damage;
+    }
+
+    monsterTurn();
+    
+    // display remaining monster HP
+    // ask player for move
+    // if player attack
+    //     call function to calculate attack
+    //     Minus damage with monster hp
+    //     check if monster is dead
+    //     timeout before monster attack
+    //     call function for monster attack (takes monster)
+    //     minus player hp with monster hp
+    //     check if player dead
+    //     repeat
+    // if player flee
+    //     call function to calculate player flee
+    //     repeat if not success, or quit
+    // if player use item
+    //      call consumeItem function
+    //      repeat
+
+    // if PLAYER WINS
+    //      Congratulate player
+    //      give player xp
+    //      return to last scene
+    // if PLAYER DIES
+    //      Game over screen
+    //      lose some money (if exists)
+    //      go back to last scene
+
+    // --END--
+
+
 }

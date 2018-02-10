@@ -181,3 +181,14 @@ var renderStats = function() {
 }
 
 //---------------------------------//
+
+// 5: Get random monster 
+var GetRandomMonster = function() {
+  var monster = playerWildMonsterArray[
+    Math.floor(
+      Math.random()
+      * playerWildMonsterArray.length
+    )
+  ];
+  return monster;
+}

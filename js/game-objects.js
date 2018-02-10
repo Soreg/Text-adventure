@@ -112,10 +112,11 @@ var Scene03 = {
   ],
   sceneType: "choices",
   sceneChoicesHeadline: "Where in the city do you go?",
+  sceneSpecialEvents: [RandomMonsterEncounter],
   sceneChoicesFirstVisit: ["I go to the shop, to buy or sell", "I go to the inn, I need to rest!", "I go to the forest - I want to slay some monsters!", "I want to explore the church of Alkarath!"],
   sceneChoices: ["Shop", "Inn", "Forest", "Church of Alkarath"],
   functionClass: "set-player-name",
-  sceneChoicesNextScene: [4, 5, 6, 3]
+  sceneChoicesNextScene: [4, 5, "e0", 3]
 };
 
 //--------------------------------------------------------------------//
@@ -150,7 +151,7 @@ var Scene05 = {
   sceneText: ["-Hello there! How can I help you?"],
   sceneType: "choices",
   sceneChoicesHeadline:"Options",
-  sceneSpecialEvents: [ShopBuyEvent, ShopSellEvent],
+  sceneSpecialEvents: [ShopBuyEvent],
   sceneChoices: ["Buy", "Sell", "Back to city"],
   sceneChoicesNextScene: ["e0", "e0", 2]
 };
@@ -292,10 +293,12 @@ var ItemStaminaPotion = {
 var MonsterTrek = {
   name: "Trek",
   id: "trek01",
+  monsterHealth: 20,
   showsAtLevel: [1, 20],
   description: "A tree-monster - Slow, but hits hard",
   damageRange: [0, 20],
-  hitChange: 25
+  hitChance: 25,
+  playerEscapeChance: 50
 };
 
 //---------------------------------//
@@ -304,10 +307,12 @@ var MonsterTrek = {
 var MonsterTrukit = {
   name: "Trukit",
   id: "trukit01",
+  monsterHealth: 20,
   showsAtLevel: [1, 10],
   description: "A tree-monster - Hits often, but low damage",
   damageRange: [0, 5],
-  hitChange: 90
+  hitChance: 90,
+  playerEscapeChance: 50
 };
 
 //---------------------------------//
@@ -316,10 +321,12 @@ var MonsterTrukit = {
 var MonsterChaba = {
   name: "Chaba",
   id: "chaba01",
+  monsterHealth: 50,
   showsAtLevel: [1, 15],
   description: "A chaba - An aggressive monster",
   damageRange: [0, 15],
-  hitChange: 25
+  hitChance: 75,
+  playerEscapeChance: 50
 };
 
 //---------------------------------//
@@ -328,10 +335,12 @@ var MonsterChaba = {
 var MonsterKatar = {
   name: "Katar",
   id: "katar01",
+  monsterHealth: 50,
   showsAtLevel: [1, 5],
   description: "With razor-sharp teeth, this monster will bite everything he sees!",
   damageRange: [0, 10],
-  hitChange: 25
+  hitChance: 75,
+  playerEscapeChance: 50
 };
 
 //---------------------------------//
@@ -340,10 +349,12 @@ var MonsterKatar = {
 var MonsterBeshy = {
   name: "Beshy",
   id: "beshy01",
+  monsterHealth: 50,
   showsAtLevel: [1, 3],
   description: "A monster in a bush - Doesn't seem friendly",
   damageRange: [0, 8],
-  hitChange: 25
+  hitChance: 75,
+  playerEscapeChance: 50
 };
 
 //---------------------------------//

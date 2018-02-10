@@ -108,7 +108,7 @@ p {
     cursor: pointer;
 }
 
-/* -- 1 EVENT CONTAINER -- */
+/* -- SHOP EVENT CONTAINER -- */
 
 #shop-event-container {
     display: none;
@@ -254,6 +254,42 @@ p {
     background: none !important;
     cursor: default;
 }
+
+/* -- BATTLE EVENT CONTAINER -- */
+
+#battle-event-container {
+    display: none;
+}
+
+#battle-event-container .outer {
+    width: 60%;
+    margin-bottom: 60px;
+    margin-top: 20px;
+}
+
+#battle-event-container .description-container {
+    text-align: center;
+    border-bottom: 1px solid white;
+    margin-bottom: 20px;
+}
+
+#battle-event-container .description-container h4 {
+    margin: 5px auto;
+}
+
+#battle-event-container .description-container .descriptions {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    margin: 10px auto;
+}
+
+#battle-event-container .description-container .description{
+    width: 48%;
+}
+
+
+
 
 /* -- INVENTORY CONTAINER -- */
 
