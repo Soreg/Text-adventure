@@ -244,9 +244,8 @@ var CompareGoldToItems = function() {
 
 // 3: Monster fights (random encounters)
 var RandomMonsterEncounter = function() {
+    var playerFled = false;
     var monster = GetRandomMonster();
-
-    var testrun = 0;
 
     // new variables to avoid overwriting monster objects
     var monsterHealth = monster.monsterHealth;
@@ -258,12 +257,12 @@ var RandomMonsterEncounter = function() {
     var playerOk = false;
 
     var mainContainer = $("#battle-event-container");
-    mainContainer.find(".fatal").removeClass("battle-won");
-    mainContainer.find(".fatal").removeClass("battle-lost");
+    mainContainer.find(".fatal").removeClass("battle-won-text");
+    mainContainer.find(".fatal").removeClass("battle-lost-text");
 
     $("#scene-outer-container").css("display", "none");
     mainContainer.css("display", "block");
-    mainContainer.find(".finish-choices .battle-won").css("display", "none");
+    mainContainer.find(".finish-choices .battle-over").css("display", "none");
     mainContainer.find(".finish-choices .battle-lost").css("display", "none");
     mainContainer.find(".round-choices").css("display", "block");
 
@@ -279,6 +278,7 @@ var RandomMonsterEncounter = function() {
 
     // -- MONSTER TURN --
     var monsterTurn = function() {
+        mainContainer.find(".fatal").empty();
         mainContainer.find(".battle-choices").css("display", "none");
         mainContainer.find(".turn").html(monster.name + "'s turn");
         mainContainer.find(".move").html(monster.name + " is considering his attack . . .");
@@ -295,12 +295,24 @@ var RandomMonsterEncounter = function() {
             else {
                 mainContainer.find(".move").html(monster.name + " missed his attack!");
             }
-    playerTurn();
+            if(playerHealth <= 0) {
+                mainContainer.find(".fatal").addClass("battle-lost-text");
+                mainContainer.find(".fatal").html("YOU HAVE DIED!");
+
+                mainContainer.find(".round-choices").css("display", "none");
+                mainContainer.find(".finish-choices").css("display", "block");
+                mainContainer.find(".battle-lost").css("display", "block");
+                mainContainer.find(".battle-choices").css("display", "block");
+            }
+            else {
+                playerTurn();
+            }
     }, 3000);
     }
 
     // -- PLAYER TURN --
     var playerTurn = function() {
+        mainContainer.find(".fatal").empty();
         mainContainer.find(".battle-choices").css("display", "block");
 
         $(".battle-attack").unbind().click(function() {
@@ -313,19 +325,18 @@ var RandomMonsterEncounter = function() {
                 monsterHealth -= playerRoundDamage;
             }
             RenderMonsterStats();
-            mainContainer.find(".turn").html("");
+            mainContainer.find(".turn").empty();
             mainContainer.find(".move").html("You hit the target!");
             mainContainer.find(".effect").html("You damaged the monster for " + playerRoundDamage + " HP!");
             if(monsterHealth <= 0) { // PLAYER WINS
-                mainContainer.find(".fatal").addClass("battle-won");
+                mainContainer.find(".fatal").addClass("battle-won-text");
                 mainContainer.find(".fatal").html("YOU KILLED THE MONSTER!");
-                // enable win-button
-                mainContainer.find(".round-choices").css("display", "none");
 
+                mainContainer.find(".round-choices").css("display", "none");
                 mainContainer.find(".finish-choices").css("display", "block");
-                mainContainer.find(".battle-won").css("display", "block");
+                mainContainer.find(".battle-over").css("display", "block");
                 mainContainer.find(".battle-choices").css("display", "block");
-            } else {
+            } else { // Game continues
                 setTimeout(function() {
                     monsterTurn();
                 }, 3000);
@@ -333,17 +344,40 @@ var RandomMonsterEncounter = function() {
         });
 
         $(".battle-run").unbind().click(function() {
-            console.log("Player is running");
+            mainContainer.find(".battle-choices").css("display", "none");
+            var escapeBool = DidPlayerFlee(monster);
+            if(escapeBool) { // player escaped
+                playerFled = true;
+                mainContainer.find(".turn").empty();
+                mainContainer.find(".move").empty();
+                mainContainer.find(".effect").empty();
+                mainContainer.find(".fatal").html("You escaped the monster!");
+                setTimeout(function() {
+                    ReturnToScene("fled");
+                }, 3000);
+            }
+            else { // escape failed
+                mainContainer.find(".turn").empty();
+                mainContainer.find(".move").empty();
+                mainContainer.find(".effect").empty();
+                mainContainer.find(".fatal").html("Escape failed!");
+                setTimeout(function() {
+                    monsterTurn();
+                }, 3000);
+            }
+
         });
 
-        // when clicking on button (WON)
-        $(".battle-won").unbind().click(function() {
-            ReturnToScene("won");
-        });
-
-        // when clicking on button (LOST)
-        $(".battle-lost").unbind().click(function() {
-            ReturnToScene("lost");
+        // when clicking on button (BATTLE OVER)
+        $(".battle-over").unbind().click(function() {
+            var outcome = "";
+            if(monsterHealth <= 0) {
+                outcome = "won";
+            }
+            else if(playerHealth <= 0) {
+                outcome = "lost";
+            }
+            ReturnToScene(outcome);
         });
     }
 
@@ -367,8 +401,9 @@ var RandomMonsterEncounter = function() {
             playerXp += monster.xpGained;
             playerGold += monster.goldToGive;
         }
-        else { // if player has lost
+        else if(outcome == "lost") { // if player has lost
             playerGold -= monster.goldToTake;
+            playerHealth += 5;
         }
 
         // Go back to previous scene
