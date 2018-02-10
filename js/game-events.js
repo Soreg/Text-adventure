@@ -258,9 +258,14 @@ var RandomMonsterEncounter = function() {
     var playerOk = false;
 
     var mainContainer = $("#battle-event-container");
+    mainContainer.find(".fatal").removeClass("battle-won");
+    mainContainer.find(".fatal").removeClass("battle-lost");
 
     $("#scene-outer-container").css("display", "none");
     mainContainer.css("display", "block");
+    mainContainer.find(".finish-choices .battle-won").css("display", "none");
+    mainContainer.find(".finish-choices .battle-lost").css("display", "none");
+    mainContainer.find(".round-choices").css("display", "block");
 
     // List monster details
     var RenderMonsterStats = function() {
@@ -269,7 +274,7 @@ var RandomMonsterEncounter = function() {
         mainContainer.find(".monster-description").html("Description: " + monster.description);
         mainContainer.find(".monster-hp").html("Monster HP: " + monsterHealth);
         mainContainer.find(".monster-damage").html("Damage range: " + monsterDmgRange[0] + " - " + monsterDmgRange[1]);
-        mainContainer.find(".monster-hit-chance").html("hit-chance: " + monsterHitChance + "%");
+        mainContainer.find(".monster-hit-chance").html("hit-chance: " + monsterHitChance*100 + "%");
     }
 
     // -- MONSTER TURN --
@@ -301,13 +306,25 @@ var RandomMonsterEncounter = function() {
         $(".battle-attack").unbind().click(function() {
             mainContainer.find(".battle-choices").css("display", "none");
             var playerRoundDamage = GetPlayerAttack();
-            monsterHealth -= playerRoundDamage;
+            if(monsterHealth - playerRoundDamage <= 0) {
+                monsterHealth = 0;
+            }
+            else {
+                monsterHealth -= playerRoundDamage;
+            }
             RenderMonsterStats();
             mainContainer.find(".turn").html("");
             mainContainer.find(".move").html("You hit the target!");
             mainContainer.find(".effect").html("You damaged the monster for " + playerRoundDamage + " HP!");
-            if(monsterHealth <= 0) {
+            if(monsterHealth <= 0) { // PLAYER WINS
+                mainContainer.find(".fatal").addClass("battle-won");
                 mainContainer.find(".fatal").html("YOU KILLED THE MONSTER!");
+                // enable win-button
+                mainContainer.find(".round-choices").css("display", "none");
+
+                mainContainer.find(".finish-choices").css("display", "block");
+                mainContainer.find(".battle-won").css("display", "block");
+                mainContainer.find(".battle-choices").css("display", "block");
             } else {
                 setTimeout(function() {
                     monsterTurn();
@@ -318,12 +335,54 @@ var RandomMonsterEncounter = function() {
         $(".battle-run").unbind().click(function() {
             console.log("Player is running");
         });
+
+        // when clicking on button (WON)
+        $(".battle-won").unbind().click(function() {
+            ReturnToScene("won");
+        });
+
+        // when clicking on button (LOST)
+        $(".battle-lost").unbind().click(function() {
+            ReturnToScene("lost");
+        });
     }
+
+    // clear scene (remove all generated html)
+    var clearScene = function() {
+        mainContainer.find(".headline").empty();
+        mainContainer.find(".monster-name").empty()
+        mainContainer.find(".monster-description").empty();
+        mainContainer.find(".monster-hp").empty();
+        mainContainer.find(".monster-damage").empty();
+        mainContainer.find(".monster-hit-chance").empty();
+        mainContainer.find(".turn").empty();
+        mainContainer.find(".move").empty();
+        mainContainer.find(".effect").empty();
+        mainContainer.find(".fatal").empty();
+    }
+
+    // Return to scene (BATTLE OVER)
+    var ReturnToScene = function(outcome) {
+        if(outcome == "won") { // if player has won
+            playerXp += monster.xpGained;
+            playerGold += monster.goldToGive;
+        }
+        else { // if player has lost
+            playerGold -= monster.goldToTake;
+        }
+
+        // Go back to previous scene
+        BuildScene(currentScene);
+        clearScene();
+        mainContainer.css("display", "none");
+        $("#scene-outer-container").css("display", "block");
+        
+    };
 
     var GetMonsterAttack = function() {
         var damage = Math.floor(Math.random() * monster.damageRange[1]) + monster.damageRange[0];
         return damage;
-    }
+    };
 
     // start turn with monster
     RenderMonsterStats();
