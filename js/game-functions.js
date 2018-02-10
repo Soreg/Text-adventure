@@ -9,6 +9,7 @@
 * 5. Get monster attack (dmg)
 * 6. Did monster hit (bool)
 * 7. Get player attack
+* 8. Did player flee (bool)
 */
 
 //---------------------------------//
@@ -170,6 +171,19 @@ $(document).on("click", ".choice", function(e) {
   
 // 4: Render stats
 var renderStats = function() {
+  // checck XP
+  if(playerXp >= playerXpForNextLevel) {
+    playerLevel++;
+    playerXp = playerXp - playerXpForNextLevel;
+    playerXpForNextLevel += 20;
+    BuildMonsterArray();
+  }
+  if(playerHealth <= 0) {
+    playerHealth = 0;
+  }
+  if(playerGold < 0) {
+    playerGold = 0;
+  }
   var container = $("#stats-container .outer .inner");
   container.find(".name").html(playerName);
   container.find(".level-container").html("<h4>Level " + playerLevel + "</h4>");
@@ -198,7 +212,7 @@ var GetRandomMonster = function() {
 
 //---------------------------------//
 
-// 6: Did monster hit 
+// 6: Did monster hit (bool)
 var DidMonsterHit = function(monster) {
   var hit = false;
   var roll = Math.random();
@@ -220,6 +234,18 @@ var GetPlayerAttack = function() {
 
   var damage = Math.floor(Math.random() * (playerMaxDmg - playerMinDmg + 1)) + playerMinDmg;
   return damage;
+}
+
+//---------------------------------//
+
+// 8: Did player flee (bool)
+var DidPlayerFlee = function(monster) {
+  var escape = false;
+  var roll = Math.random();
+  if(roll < monster.playerEscapeChance) {
+    escape = true;
+  }
+  return escape;
 }
 
 //---------------------------------//
