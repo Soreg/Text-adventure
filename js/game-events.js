@@ -249,6 +249,8 @@ var CompareGoldToItems = function() {
 
 // 3: Monster fights (random encounters)
 var RandomMonsterEncounter = function() {
+    console.log("Start of file");
+    var battleOver = false;
     var playerFled = false;
     var monster = GetRandomMonster();
 
@@ -284,6 +286,9 @@ var RandomMonsterEncounter = function() {
 
     // -- MONSTER TURN --
     var monsterTurn = function() {
+        if(battleOver) {
+            return;
+        }
         $(".inventory-element").addClass("disabled");
         mainContainer.find(".fatal").empty();
         mainContainer.find(".battle-choices").css("display", "none");
@@ -314,11 +319,14 @@ var RandomMonsterEncounter = function() {
             else {
                 playerTurn();
             }
-    }, 3000);
+    }, 2000);
     }
 
     // -- PLAYER TURN --
     var playerTurn = function() {
+        if(battleOver) {
+            return;
+        }
         $(".inventory-element").removeClass("disabled");
         mainContainer.find(".fatal").empty();
         mainContainer.find(".battle-choices").css("display", "block");
@@ -348,7 +356,7 @@ var RandomMonsterEncounter = function() {
             } else { // Game continues
                 setTimeout(function() {
                     monsterTurn();
-                }, 3000);
+                }, 1500);
             }
         });
 
@@ -364,7 +372,7 @@ var RandomMonsterEncounter = function() {
                 mainContainer.find(".fatal").html("You escaped the monster!");
                 setTimeout(function() {
                     ReturnToScene("fled");
-                }, 3000);
+                }, 1500);
             }
             else { // escape failed
                 mainContainer.find(".turn").empty();
@@ -373,7 +381,7 @@ var RandomMonsterEncounter = function() {
                 mainContainer.find(".fatal").html("Escape failed!");
                 setTimeout(function() {
                     monsterTurn();
-                }, 3000);
+                }, 1500);
             }
 
         });
@@ -393,7 +401,16 @@ var RandomMonsterEncounter = function() {
 
         // When consuming item
         $(".inventory-element").click(function() {
-            // Consume item
+            if(!battleOver) {
+                $(".inventory-element").addClass("disabled");
+                // Render what you used
+                mainContainer.find(".battle-choices").css("display", "none");
+                mainContainer.find(".battle-container h4").empty();
+                mainContainer.find(".battle-container .effect").html("You used an item!");
+                setTimeout(function() {
+                    monsterTurn();
+                }, 1500);
+            }
         });
     }
 
@@ -428,7 +445,8 @@ var RandomMonsterEncounter = function() {
         clearScene();
         mainContainer.css("display", "none");
         $("#scene-outer-container").css("display", "block");
-        
+        battleOver = true;
+        return;
     };
 
     var GetMonsterAttack = function() {
@@ -437,8 +455,10 @@ var RandomMonsterEncounter = function() {
     };
 
     // start turn with monster
+    console.log("Game starting");
     RenderMonsterStats();
     monsterTurn();
+    return;
     
     // display remaining monster HP
     // ask player for move
