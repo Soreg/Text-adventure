@@ -234,7 +234,7 @@ var ItemMinorHealthPotion = {
   name: "Minor health potion",
   id: "smHpPotion",
   description: "A minor healing potion - heals 10 hp",
-  specialStat: ["+10 hp"],
+  specialStat: [["hp", 10]],
   value: "5"
 };
 
@@ -245,7 +245,7 @@ var ItemHealthPotion = {
   name: "Health potion",
   id: "hpPotion",
   description: "A healing potion - heals 25 hp",
-  specialStat: ["+25 hp"],
+  specialStat: [["hp", 25]],
   value: "10"
 };
 
@@ -256,35 +256,17 @@ var ItemBigHealthPotion = {
   name: "Big health potion",
   id: "lgHpPotion",
   description: "A big healing potion - heals 50 hp",
-  specialStat: ["+50 hp"],
+  specialStat: [["hp", 50]],
   value: "25"
 };
 
 //---------------------------------//
 
-// 4: Magicka potion
-var ItemMagickaPotion = {
-  name: "Magicka potion",
-  id: "magPotion",
-  description: "A magicka potion - Gives +25 magicka",
-  specialStat: ["+25 magicka"],
-  value: "10"
-};
-
-//---------------------------------//
-
-// 5: Stamina potion
-var ItemStaminaPotion = {
-  name: "Stamina potion",
-  id: "staPotion",
-  description: "A stamina potion - Gives +25 stamina",
-  specialStat: ["+25 stamina"],
-  value: "8"
-};
-
-//---------------------------------//
-
+// Item arrays
+var NimbaShopItems = [ItemMinorHealthPotion, ItemHealthPotion, ItemBigHealthPotion];
 //*====== END OF ITEMS ====== */
+
+
 
 
 /* === MONSTERS === */
