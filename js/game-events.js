@@ -269,8 +269,8 @@ var RandomMonsterEncounter = function() {
     // List monster details
     var RenderMonsterStats = function() {
         mainContainer.find(".headline").html("You encountered a monster!");
-        mainContainer.find(".monster-name").html("Monster: " + monster.name);
-        mainContainer.find(".monster-description").html("Description: " + monster.description);
+        mainContainer.find(".monster-name").html("Monster: <span>" + monster.name + "</span>");
+        mainContainer.find(".monster-description").html("Description: <span>" + monster.description + "</span>");
         mainContainer.find(".monster-hp").html("Monster HP: " + monsterHealth);
         mainContainer.find(".monster-damage").html("Damage range: " + monsterDmgRange[0] + " - " + monsterDmgRange[1]);
         mainContainer.find(".monster-hit-chance").html("hit-chance: " + monsterHitChance*100 + "%");
