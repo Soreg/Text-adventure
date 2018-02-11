@@ -175,11 +175,15 @@ var renderStats = function() {
   if(playerXp >= playerXpForNextLevel) {
     playerLevel++;
     playerXp = playerXp - playerXpForNextLevel;
+    playerMaxHealth += 20;
     playerXpForNextLevel += 20;
     BuildMonsterArray();
   }
   if(playerHealth <= 0) {
     playerHealth = 0;
+  }
+  else if( playerHealth > playerMaxHealth) {
+    playerHealth = playerMaxHealth;
   }
   if(playerGold < 0) {
     playerGold = 0;
@@ -188,7 +192,7 @@ var renderStats = function() {
   container.find(".name").html(playerName);
   container.find(".level-container").html("<h4>Level " + playerLevel + "</h4>");
   container.find(".level-progress-container").html("<p>" + playerXp + " XP out of " + playerXpForNextLevel + " XP</p>");
-  container.find(".player-stats-container .player-stats.hp").html("<h4>HP: " + playerHealth + "</h4>");
+  container.find(".player-stats-container .player-stats.hp").html("<h4>HP: " + playerHealth + " / " + playerMaxHealth + "</h4>");
   if(playerBonusDamage > 0) {
     container.find(".player-stats-container .player-stats.damage").html("<h4>Damage: " + playerBasicDamage + " (+ " + playerBonusDamage + " bonus)</h4>");
   } else {

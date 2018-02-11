@@ -20,6 +20,7 @@ var playerWildMonsterArray = []; // Array of monsters the player can encounter (
 var playerGold = 100;
 var playerBasicDamage = 10;
 var playerHealth = 100;
+var playerMaxHealth = 100;
 var playerLevel = 1;
 var playerXp = 0;
 var playerXpForNextLevel = 100;
