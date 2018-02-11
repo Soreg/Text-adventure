@@ -208,7 +208,7 @@ p {
     overflow: hidden;
 }
 
-#shop-event-container .shop-choices .button-choice {
+.button-choice {
     font-size: 24px;
     border: 1px solid grey;
     display: block;
@@ -218,7 +218,7 @@ p {
     width: 200px;
 }
 
-#shop-event-container .shop-choices .button-choice:hover {
+.button-choice:hover {
     cursor: pointer;
     background: rgba(0, 0, 0, 0.4);
 }
@@ -273,8 +273,12 @@ p {
     margin-bottom: 20px;
 }
 
+#battle-event-container .description-container .headline {
+    margin-bottom: 20px;
+}
+
 #battle-event-container .description-container h4 {
-    margin: 5px auto;
+    margin: 10px auto 5px auto;
 }
 
 #battle-event-container .description-container .descriptions {
@@ -288,8 +292,15 @@ p {
     width: 48%;
 }
 
+#battle-event-container .battle-container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
 
-
+#battle-event-container .battle-container h4 {
+    margin: 10px 0;
+}
 
 /* -- INVENTORY CONTAINER -- */
 
