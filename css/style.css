@@ -363,6 +363,15 @@ p {
     padding: 10px 0;
 }
 
+#inventory-container ul li.disabled {
+    color: rgb(160, 160, 160);
+}
+
+#inventory-container ul li.disabled:hover {
+    background: none;
+    cursor: default;
+}
+
 #inventory-container ul li > span {
     float: right;
     margin-right: 10px;
