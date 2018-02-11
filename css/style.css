@@ -313,6 +313,31 @@ p {
     margin: 10px 0;
 }
 
+/* -- RESTORE HP EVENT CONTAINER -- */
+
+#restore-hp-event-container {
+    display: none;
+}
+
+#restore-hp-event-container .outer {
+    width: 60%;
+    margin-bottom: 60px;
+    margin-top: 20px;
+}
+
+#restore-hp-event-container h4 {
+    text-align: center;
+    margin: 15px 0;
+}
+
+#restore-hp-event-container .price {
+    color: rgb(223, 75, 75);
+}
+
+#restore-hp-event-container .effect {
+    color: lightgreen;
+}
+
 /* -- INVENTORY CONTAINER -- */
 
 #inventory-container .outer {
