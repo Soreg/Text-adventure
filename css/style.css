@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Slabo+27px|Supermercado+One|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px|Nanum+Brush+Script|Supermercado+One|Ubuntu|Oxygen');
 * {
     margin: 0;
     padding: 0;
@@ -275,6 +275,17 @@ p {
 
 #battle-event-container .description-container .headline {
     margin-bottom: 20px;
+}
+
+#battle-event-container .description-container .monster-name span {
+    font-family: "Oxygen";
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-style: italic;
+}
+
+#battle-event-container .description-container .monster-description span {
+    font-style: italic;
 }
 
 #battle-event-container .description-container h4 {
