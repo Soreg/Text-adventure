@@ -164,8 +164,9 @@ var Scene06 = {
   sceneText: ["-Hello, Hello, Helloooo!", "-Do you want to stay in one of our fine rooms?"],
   sceneType: "choices",
   sceneChoicesHeadline: "Do you wish to sleep at the inn?",
-  sceneChoices: ["Yes (restore full stamina) (-10 gold)", "No, back to city"],
-  sceneChoicesNextScene: [2, 2]
+  sceneSpecialEvents: [RestoreHpEvent],
+  sceneChoices: ["Yes (restore full health) (-10 gold)", "No, back to city"],
+  sceneChoicesNextScene: ["e0", 2]
 };
 
 //--------------------------------------------------------------------//

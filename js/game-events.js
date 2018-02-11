@@ -7,6 +7,7 @@
 * 2. Compare gold to items (check if can buy)
 * 3. Monster fights
 * 4. Boss fights
+* 5. Restore HP
 */
 
 //---------------------------------//
@@ -211,6 +212,8 @@ var ShopBuyEvent = function(action) {
     // show event after build complete
 }
 
+//---------------------------------//
+
 // 2: Compare gold to items
 var CompareGoldToItems = function() {
     var container = $("#shop-event-container .shop-container .player-gold");
@@ -241,6 +244,8 @@ var CompareGoldToItems = function() {
 
     return totalValue;
 }
+
+//---------------------------------//
 
 // 3: Monster fights (random encounters)
 var RandomMonsterEncounter = function() {
@@ -455,3 +460,34 @@ var RandomMonsterEncounter = function() {
 
 
 }
+
+//---------------------------------//
+
+// 4: Boss fights
+
+//---------------------------------//
+
+// 5: Restore HP
+var RestoreHpEvent = function() {
+    $("#scene-outer-container").css("display", "none");
+    var mainContainer = $("#restore-hp-event-container");
+    mainContainer.css("display", "block");
+    if(playerGold >= 10) {
+        playerGold -= 10;
+        playerHealth = playerMaxHealth;
+        renderStats();
+        mainContainer.find(".effect").html("Your health has been restored!");
+        mainContainer.find(".price").html("10 gold has been removed from your account");
+    }
+    else {
+        mainContainer.find(".effect").html("Sorry, you don't seem to have enough gold!");
+        mainContainer.find(".price").empty();
+    }
+    // add timeout before returning to previous scene
+    setTimeout(function() {
+        mainContainer.css("display", "none")
+        $("#scene-outer-container").css("display", "block");
+    }, 3000);
+}
+
+//---------------------------------//
