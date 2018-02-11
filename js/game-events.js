@@ -262,6 +262,7 @@ var RandomMonsterEncounter = function() {
     var playerOk = false;
 
     var mainContainer = $("#battle-event-container");
+    // Disable inventory
     mainContainer.find(".fatal").removeClass("battle-won-text");
     mainContainer.find(".fatal").removeClass("battle-lost-text");
 
@@ -283,6 +284,7 @@ var RandomMonsterEncounter = function() {
 
     // -- MONSTER TURN --
     var monsterTurn = function() {
+        $(".inventory-element").addClass("disabled");
         mainContainer.find(".fatal").empty();
         mainContainer.find(".battle-choices").css("display", "none");
         mainContainer.find(".turn").html(monster.name + "'s turn");
@@ -317,10 +319,12 @@ var RandomMonsterEncounter = function() {
 
     // -- PLAYER TURN --
     var playerTurn = function() {
+        $(".inventory-element").removeClass("disabled");
         mainContainer.find(".fatal").empty();
         mainContainer.find(".battle-choices").css("display", "block");
 
         $(".battle-attack").unbind().click(function() {
+            $(".inventory-element").addClass("disabled");
             mainContainer.find(".battle-choices").css("display", "none");
             var playerRoundDamage = GetPlayerAttack();
             if(monsterHealth - playerRoundDamage <= 0) {
@@ -349,6 +353,7 @@ var RandomMonsterEncounter = function() {
         });
 
         $(".battle-run").unbind().click(function() {
+            $(".inventory-element").addClass("disabled");
             mainContainer.find(".battle-choices").css("display", "none");
             var escapeBool = DidPlayerFlee(monster);
             if(escapeBool) { // player escaped
@@ -385,6 +390,11 @@ var RandomMonsterEncounter = function() {
             console.log(outcome);
             ReturnToScene(outcome);
         });
+
+        // When consuming item
+        $(".inventory-element").click(function() {
+            // Consume item
+        });
     }
 
     // clear scene (remove all generated html)
@@ -411,6 +421,7 @@ var RandomMonsterEncounter = function() {
             playerGold -= monster.goldToTake;
             playerHealth += 5;
         }
+        $(".inventory-element").removeClass("disabled");
 
         // Go back to previous scene
         BuildScene(currentScene);

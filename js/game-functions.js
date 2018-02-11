@@ -104,20 +104,24 @@ var renderInventory = function() {
 
   // Add description on hover
   $(".inventory-element").hover(function(e) {
-    var classNames = e.target.className.split(" ");
-    var i = classNames[1];
-    var descP = $(".inventory-item-description");
-    var desc = playerInventory[i].description;
-
-    descP.html(desc);
+    if(!$(this).hasClass("disabled")) {
+      var classNames = e.target.className.split(" ");
+      var i = classNames[1];
+      var descP = $(".inventory-item-description");
+      var desc = playerInventory[i].description;
+  
+      descP.html(desc);
+    }
   });
 
   // Consume item on click (call function)
   $(".inventory-element").click(function(e) {
-    var classNames = e.target.className.split(" ");
-    var i = classNames[1];
-    var item = playerInventory[i];
-    ConsumeItem(item);
+    if(!$(this).hasClass("disabled")) {
+      var classNames = e.target.className.split(" ");
+      var i = classNames[1];
+      var item = playerInventory[i];
+      ConsumeItem(item);
+    }
   });
 
   // change text back on mouse leave
