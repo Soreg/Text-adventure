@@ -301,7 +301,7 @@ var RandomMonsterEncounter = function() {
 
                 mainContainer.find(".round-choices").css("display", "none");
                 mainContainer.find(".finish-choices").css("display", "block");
-                mainContainer.find(".battle-lost").css("display", "block");
+                mainContainer.find(".battle-over").css("display", "block");
                 mainContainer.find(".battle-choices").css("display", "block");
             }
             else {
@@ -377,6 +377,7 @@ var RandomMonsterEncounter = function() {
             else if(playerHealth <= 0) {
                 outcome = "lost";
             }
+            console.log(outcome);
             ReturnToScene(outcome);
         });
     }
