@@ -6,7 +6,6 @@ var mainCityName = "Nimba";
 var mainChurchName = "Alkarath";
 
 // Misc variables
-var NimbaShopItems = [ItemMinorHealthPotion, ItemHealthPotion, ItemBigHealthPotion, ItemMagickaPotion, ItemStaminaPotion];
 
 // Game-function variables -- Used by game engine
 var currentScene = Scene01;
