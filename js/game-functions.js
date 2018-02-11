@@ -112,6 +112,14 @@ var renderInventory = function() {
     descP.html(desc);
   });
 
+  // Consume item on click (call function)
+  $(".inventory-element").click(function(e) {
+    var classNames = e.target.className.split(" ");
+    var i = classNames[1];
+    var item = playerInventory[i];
+    ConsumeItem(item);
+  });
+
   // change text back on mouse leave
   $(".inventory-element").mouseleave(function() {
     $(".inventory-item-description").html("Description");
