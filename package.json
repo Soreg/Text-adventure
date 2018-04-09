@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Soreg/Text-adventure/issues"
   },
-  "homepage": "https://github.com/Soreg/Text-adventure#readme"
+  "homepage": "https://github.com/Soreg/Text-adventure#readme",
+  "devDependencies": {
+    "node-sass": "^4.8.3"
+  }
 }
