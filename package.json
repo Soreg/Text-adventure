@@ -1,0 +1,19 @@
+{
+  "name": "text-adventure",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Soreg/Text-adventure.git"
+  },
+  "author": "Soren Gravesen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Soreg/Text-adventure/issues"
+  },
+  "homepage": "https://github.com/Soreg/Text-adventure#readme"
+}
