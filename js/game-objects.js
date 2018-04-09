@@ -4,7 +4,7 @@
 * == INCLUDES ==
 * -- Scenes -- (Section, large)
 * -- Items (Section, large)
-*
+* -- Monsters (Section, Large)
 *
 *
 */
@@ -23,7 +23,6 @@
 * 7: Forest
 * 8: Holy keep
 * 9: Prayer room
-*
 */
 
 //---------------------------------//
@@ -38,6 +37,20 @@
 * 5: Stamina potion
 */
 
+//---------------------------------//
+
+/* -- MONSTERS -- */
+
+/*
+* 1: Trek (lvl 1-5)
+* 2: Trukit (lvl 1-5)
+* 3: Chaba (lvl 1-5)
+* 4: Katar (lvl 1-5)
+* 5: Beshy (lvl 1-5)
+*/
+
+//---------------------------------//
+
 //===================================//
 //===================================//
 
@@ -46,10 +59,6 @@ var nimbaFirstVisit = true, alkarathFirstVisit = true, nimbaForestFirstVisit = t
 
 
 /* === SCENES === */
-
-
-
-
 
 //1: Scene01 - Intro scene
 var Scene01 = {
@@ -68,19 +77,23 @@ var Scene01 = {
   sceneChoicesNextScene: [1]
 };
 
+//--------------------------------------------------------------------//
+
 // 2: Scene02 - Choose Initial Route
 var Scene02 = {
-    sceneName: "A splitting path",
-    sceneText: [
-      "You venture down the path of adventure, and suddenly it splits in two.",
-      "You read the roadsigns. The left path goes to Church of Alkarath, while the right goes to the city of Nimba.",
-    ],
-    sceneType: "choices",
-    sceneChoicesHeadline: "Which path do you choose",
-    sceneChoices: ["I go left, to the church of Alkarath", "I go right, to the city of Nimba"],
-    functionClass: "set-player-name",
-    sceneChoicesNextScene: [3, 2]
-  };
+  sceneName: "A splitting path",
+  sceneText: [
+    "You venture down the path of adventure, and suddenly it splits in two.",
+    "You read the roadsigns. The left path goes to Church of Alkarath, while the right goes to the city of Nimba.",
+  ],
+  sceneType: "choices",
+  sceneChoicesHeadline: "Which path do you choose",
+  sceneChoices: ["I go left, to the church of Alkarath", "I go right, to the city of Nimba"],
+  functionClass: "set-player-name",
+  sceneChoicesNextScene: [3, 2]
+};
+
+  //--------------------------------------------------------------------//
 
 // 3: Scene03 - City
 var Scene03 = {
@@ -99,11 +112,14 @@ var Scene03 = {
   ],
   sceneType: "choices",
   sceneChoicesHeadline: "Where in the city do you go?",
+  sceneSpecialEvents: [RandomMonsterEncounter],
   sceneChoicesFirstVisit: ["I go to the shop, to buy or sell", "I go to the inn, I need to rest!", "I go to the forest - I want to slay some monsters!", "I want to explore the church of Alkarath!"],
   sceneChoices: ["Shop", "Inn", "Forest", "Church of Alkarath"],
   functionClass: "set-player-name",
-  sceneChoicesNextScene: [4, 5, 6, 3]
+  sceneChoicesNextScene: [4, 5, "e0", 3]
 };
+
+//--------------------------------------------------------------------//
 
 // 4: Scene04 - Church
 var Scene04 = {
@@ -127,16 +143,20 @@ var Scene04 = {
   sceneChoicesNextScene: [8, 7, 6, 2]
 };
 
+//--------------------------------------------------------------------//
+
 // 5: Scene05 - Shop
 var Scene05 = {
   sceneName: "The Nimba Shop",
   sceneText: ["-Hello there! How can I help you?"],
   sceneType: "choices",
   sceneChoicesHeadline:"Options",
-  sceneSpecialEvents: [ShopBuyEvent, ShopSellEvent],
+  sceneSpecialEvents: [ShopBuyEvent],
   sceneChoices: ["Buy", "Sell", "Back to city"],
   sceneChoicesNextScene: ["e0", "e0", 2]
 };
+
+//--------------------------------------------------------------------//
 
 // 6: Scene06 - Inn
 var Scene06 = {
@@ -144,9 +164,12 @@ var Scene06 = {
   sceneText: ["-Hello, Hello, Helloooo!", "-Do you want to stay in one of our fine rooms?"],
   sceneType: "choices",
   sceneChoicesHeadline: "Do you wish to sleep at the inn?",
-  sceneChoices: ["Yes (restore full stamina) (-10 gold)", "No, back to city"],
-  sceneChoicesNextScene: [2, 2]
+  sceneSpecialEvents: [RestoreHpEvent],
+  sceneChoices: ["Yes (restore full health) (-10 gold)", "No, back to city"],
+  sceneChoicesNextScene: ["e0", 2]
 };
+
+//--------------------------------------------------------------------//
 
 // 7: Scene07 -  Forest
 var Scene07 = {
@@ -172,6 +195,8 @@ var Scene07 = {
   sceneChoicesNextScene: ["event", 2, 3]
 };
 
+//--------------------------------------------------------------------//
+
 // 8: Scene08 - Holy Keep
 var Scene08 = {
   sceneName: "Holy Keep of Alkarath",
@@ -182,6 +207,8 @@ var Scene08 = {
   sceneChoicesNextScene: [2, 3]
 };
 
+//--------------------------------------------------------------------//
+
 // 9: Scene09 - Prayer Room
 var Scene09 = {
   sceneName: "Holy Keep of Alkarath",
@@ -191,6 +218,8 @@ var Scene09 = {
   sceneChoices: ["Nimba", "Church"],
   sceneChoicesNextScene: [2, 3]
 };
+
+//--------------------------------------------------------------------//
 
 //*====== END OF SCENES ====== */
 
@@ -205,7 +234,7 @@ var ItemMinorHealthPotion = {
   name: "Minor health potion",
   id: "smHpPotion",
   description: "A minor healing potion - heals 10 hp",
-  specialStat: ["+10 hp"],
+  specialStat: [["hp", 10]],
   value: "5"
 };
 
@@ -216,7 +245,7 @@ var ItemHealthPotion = {
   name: "Health potion",
   id: "hpPotion",
   description: "A healing potion - heals 25 hp",
-  specialStat: ["+25 hp"],
+  specialStat: [["hp", 25]],
   value: "10"
 };
 
@@ -227,31 +256,106 @@ var ItemBigHealthPotion = {
   name: "Big health potion",
   id: "lgHpPotion",
   description: "A big healing potion - heals 50 hp",
-  specialStat: ["+50 hp"],
+  specialStat: [["hp", 50]],
   value: "25"
 };
 
 //---------------------------------//
 
-// 4: Magicka potion
-var ItemMagickaPotion = {
-  name: "Magicka potion",
-  id: "magPotion",
-  description: "A magicka potion - Gives +25 magicka",
-  specialStat: ["+25 magicka"],
-  value: "10"
+// Item arrays
+var NimbaShopItems = [ItemMinorHealthPotion, ItemHealthPotion, ItemBigHealthPotion];
+//*====== END OF ITEMS ====== */
+
+
+
+
+/* === MONSTERS === */
+// - HitChange: % (100 = always, 0 = never)
+
+// 1: Trek (lvl 1-20)
+var MonsterTrek = {
+  name: "Trek",
+  id: "trek01",
+  monsterHealth: 20,
+  showsAtLevel: [1, 20],
+  description: "A tree-monster - Slow, but hits hard",
+  damageRange: [5, 20],
+  hitChance: 0.25,
+  playerEscapeChance: 0.5,
+  xpGained: 25,
+  goldToGive: 5,
+  goldToTake: 10
 };
 
 //---------------------------------//
 
-// 5: Stamina potion
-var ItemStaminaPotion = {
-  name: "Stamina potion",
-  id: "staPotion",
-  description: "A stamina potion - Gives +25 stamina",
-  specialStat: ["+25 stamina"],
-  value: "8"
+// 2: Trukit (lvl 1-10)
+var MonsterTrukit = {
+  name: "Trukit",
+  id: "trukit01",
+  monsterHealth: 20,
+  showsAtLevel: [1, 10],
+  description: "A tree-monster - Hits often, but low damage",
+  damageRange: [1, 5],
+  hitChance: 0.9,
+  playerEscapeChance: 0.5,
+  xpGained: 5,
+  goldToGive: 5,
+  goldToTake: 10
 };
 
 //---------------------------------//
 
+// 3: Chaba (lvl 1-15)
+var MonsterChaba = {
+  name: "Chaba",
+  id: "chaba01",
+  monsterHealth: 50,
+  showsAtLevel: [1, 15],
+  description: "A chaba - An aggressive monster",
+  damageRange: [5, 15],
+  hitChance: 0.75,
+  playerEscapeChance: 0.5,
+  xpGained: 8,
+  goldToGive: 5,
+  goldToTake: 10
+};
+
+//---------------------------------//
+
+// 4: Katar (lvl 1-5)
+var MonsterKatar = {
+  name: "Katar",
+  id: "katar01",
+  monsterHealth: 50,
+  showsAtLevel: [1, 5],
+  description: "With razor-sharp teeth, this monster will bite everything he sees!",
+  damageRange: [2, 10],
+  hitChance: 0.75,
+  playerEscapeChance: 0.5,
+  xpGained: 5,
+  goldToGive: 5,
+  goldToTake: 10
+};
+
+//---------------------------------//
+
+// 5: Beshy (lvl 1-3)
+var MonsterBeshy = {
+  name: "Beshy",
+  id: "beshy01",
+  monsterHealth: 50,
+  showsAtLevel: [1, 3],
+  description: "A monster in a bush - Doesn't seem friendly",
+  damageRange: [1, 8],
+  hitChance: 0.75,
+  playerEscapeChance: 0.5,
+  xpGained: 10,
+  goldToGive: 5,
+  goldToTake: 10
+};
+
+//---------------------------------//
+
+// monster arrays
+var wildMonsterArray = [MonsterTrek, MonsterTrukit, MonsterChaba, MonsterKatar, MonsterBeshy];

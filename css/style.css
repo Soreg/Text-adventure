@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Slabo+27px|Supermercado+One|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px|Nanum+Brush+Script|Supermercado+One|Ubuntu|Oxygen');
 * {
     margin: 0;
     padding: 0;
@@ -108,7 +108,7 @@ p {
     cursor: pointer;
 }
 
-/* -- 1 EVENT CONTAINER -- */
+/* -- SHOP EVENT CONTAINER -- */
 
 #shop-event-container {
     display: none;
@@ -208,7 +208,7 @@ p {
     overflow: hidden;
 }
 
-#shop-event-container .shop-choices .button-choice {
+.button-choice {
     font-size: 24px;
     border: 1px solid grey;
     display: block;
@@ -218,7 +218,7 @@ p {
     width: 200px;
 }
 
-#shop-event-container .shop-choices .button-choice:hover {
+.button-choice:hover {
     cursor: pointer;
     background: rgba(0, 0, 0, 0.4);
 }
@@ -255,6 +255,89 @@ p {
     cursor: default;
 }
 
+/* -- BATTLE EVENT CONTAINER -- */
+
+#battle-event-container {
+    display: none;
+}
+
+#battle-event-container .outer {
+    width: 60%;
+    margin-bottom: 60px;
+    margin-top: 20px;
+}
+
+#battle-event-container .description-container {
+    text-align: center;
+    border-bottom: 1px solid white;
+    margin-bottom: 20px;
+}
+
+#battle-event-container .description-container .headline {
+    margin-bottom: 20px;
+}
+
+#battle-event-container .description-container .monster-name span {
+    font-family: "Oxygen";
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-style: italic;
+}
+
+#battle-event-container .description-container .monster-description span {
+    font-style: italic;
+}
+
+#battle-event-container .description-container h4 {
+    margin: 10px auto 5px auto;
+}
+
+#battle-event-container .description-container .descriptions {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+    margin: 10px auto;
+}
+
+#battle-event-container .description-container .description{
+    width: 48%;
+}
+
+#battle-event-container .battle-container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+}
+
+#battle-event-container .battle-container h4 {
+    margin: 10px 0;
+}
+
+/* -- RESTORE HP EVENT CONTAINER -- */
+
+#restore-hp-event-container {
+    display: none;
+}
+
+#restore-hp-event-container .outer {
+    width: 60%;
+    margin-bottom: 60px;
+    margin-top: 20px;
+}
+
+#restore-hp-event-container h4 {
+    text-align: center;
+    margin: 15px 0;
+}
+
+#restore-hp-event-container .price {
+    color: rgb(223, 75, 75);
+}
+
+#restore-hp-event-container .effect {
+    color: lightgreen;
+}
+
 /* -- INVENTORY CONTAINER -- */
 
 #inventory-container .outer {
@@ -278,6 +361,15 @@ p {
 #inventory-container ul li {
     font-size: 20px;
     padding: 10px 0;
+}
+
+#inventory-container ul li.disabled {
+    color: rgb(160, 160, 160);
+}
+
+#inventory-container ul li.disabled:hover {
+    background: none;
+    cursor: default;
 }
 
 #inventory-container ul li > span {

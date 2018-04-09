@@ -5,9 +5,9 @@
 * == INCLUDES ==
 * 1. Shop (buy) 
 * 2. Compare gold to items (check if can buy)
-* 3. Shop (sell)
-* 4. Monster fights
-* 5. Boss fights
+* 3. Monster fights
+* 4. Boss fights
+* 5. Restore HP
 */
 
 //---------------------------------//
@@ -212,6 +212,8 @@ var ShopBuyEvent = function(action) {
     // show event after build complete
 }
 
+//---------------------------------//
+
 // 2: Compare gold to items
 var CompareGoldToItems = function() {
     var container = $("#shop-event-container .shop-container .player-gold");
@@ -243,5 +245,280 @@ var CompareGoldToItems = function() {
     return totalValue;
 }
 
-var ShopSellEvent = function() {
+//---------------------------------//
+
+// 3: Monster fights (random encounters)
+var RandomMonsterEncounter = function() {
+    console.log("Start of file");
+    var battleOver = false;
+    var playerFled = false;
+    var monster = GetRandomMonster();
+
+    // new variables to avoid overwriting monster objects
+    var monsterHealth = monster.monsterHealth;
+    var monsterDmgRange = [monster.damageRange[0], monster.damageRange[1]];
+    var monsterHitChance = monster.hitChance;
+    var monsterPlayerEscapeChance = monster.playerEscapeChace;
+
+    var playerFled = false;
+    var playerOk = false;
+
+    var mainContainer = $("#battle-event-container");
+    // Disable inventory
+    mainContainer.find(".fatal").removeClass("battle-won-text");
+    mainContainer.find(".fatal").removeClass("battle-lost-text");
+
+    $("#scene-outer-container").css("display", "none");
+    mainContainer.css("display", "block");
+    mainContainer.find(".finish-choices .battle-over").css("display", "none");
+    mainContainer.find(".finish-choices .battle-lost").css("display", "none");
+    mainContainer.find(".round-choices").css("display", "block");
+
+    // List monster details
+    var RenderMonsterStats = function() {
+        mainContainer.find(".headline").html("You encountered a monster!");
+        mainContainer.find(".monster-name").html("Monster: <span>" + monster.name + "</span>");
+        mainContainer.find(".monster-description").html("Description: <span>" + monster.description + "</span>");
+        mainContainer.find(".monster-hp").html("Monster HP: " + monsterHealth);
+        mainContainer.find(".monster-damage").html("Damage range: " + monsterDmgRange[0] + " - " + monsterDmgRange[1]);
+        mainContainer.find(".monster-hit-chance").html("hit-chance: " + monsterHitChance*100 + "%");
+    }
+
+    // -- MONSTER TURN --
+    var monsterTurn = function() {
+        if(battleOver) {
+            return;
+        }
+        $(".inventory-element").addClass("disabled");
+        mainContainer.find(".fatal").empty();
+        mainContainer.find(".battle-choices").css("display", "none");
+        mainContainer.find(".turn").html(monster.name + "'s turn");
+        mainContainer.find(".move").html(monster.name + " is considering his attack . . .");
+        mainContainer.find(".effect").html("");
+        var monsterHit = DidMonsterHit(monster);
+        setTimeout(function() {
+            if(monsterHit) {
+                var monsterTurnDamage = GetMonsterAttack();
+                playerHealth -= monsterTurnDamage;
+                renderStats();
+                mainContainer.find(".move").html(monster.name + " strikes hard!");
+                mainContainer.find(".effect").html("It damaged for " + monsterTurnDamage + " HP!");
+            }
+            else {
+                mainContainer.find(".move").html(monster.name + " missed his attack!");
+            }
+            if(playerHealth <= 0) {
+                mainContainer.find(".fatal").addClass("battle-lost-text");
+                mainContainer.find(".fatal").html("YOU HAVE DIED!");
+
+                mainContainer.find(".round-choices").css("display", "none");
+                mainContainer.find(".finish-choices").css("display", "block");
+                mainContainer.find(".battle-over").css("display", "block");
+                mainContainer.find(".battle-choices").css("display", "block");
+            }
+            else {
+                playerTurn();
+            }
+    }, 2000);
+    }
+
+    // -- PLAYER TURN --
+    var playerTurn = function() {
+        if(battleOver) {
+            return;
+        }
+        $(".inventory-element").removeClass("disabled");
+        mainContainer.find(".fatal").empty();
+        mainContainer.find(".battle-choices").css("display", "block");
+
+        $(".battle-attack").unbind().click(function() {
+            $(".inventory-element").addClass("disabled");
+            mainContainer.find(".battle-choices").css("display", "none");
+            var playerRoundDamage = GetPlayerAttack();
+            if(monsterHealth - playerRoundDamage <= 0) {
+                monsterHealth = 0;
+            }
+            else {
+                monsterHealth -= playerRoundDamage;
+            }
+            RenderMonsterStats();
+            mainContainer.find(".turn").empty();
+            mainContainer.find(".move").html("You hit the target!");
+            mainContainer.find(".effect").html("You damaged the monster for " + playerRoundDamage + " HP!");
+            if(monsterHealth <= 0) { // PLAYER WINS
+                mainContainer.find(".fatal").addClass("battle-won-text");
+                mainContainer.find(".fatal").html("YOU KILLED THE MONSTER!");
+
+                mainContainer.find(".round-choices").css("display", "none");
+                mainContainer.find(".finish-choices").css("display", "block");
+                mainContainer.find(".battle-over").css("display", "block");
+                mainContainer.find(".battle-choices").css("display", "block");
+            } else { // Game continues
+                setTimeout(function() {
+                    monsterTurn();
+                }, 1500);
+            }
+        });
+
+        $(".battle-run").unbind().click(function() {
+            $(".inventory-element").addClass("disabled");
+            mainContainer.find(".battle-choices").css("display", "none");
+            var escapeBool = DidPlayerFlee(monster);
+            if(escapeBool) { // player escaped
+                playerFled = true;
+                mainContainer.find(".turn").empty();
+                mainContainer.find(".move").empty();
+                mainContainer.find(".effect").empty();
+                mainContainer.find(".fatal").html("You escaped the monster!");
+                setTimeout(function() {
+                    ReturnToScene("fled");
+                }, 1500);
+            }
+            else { // escape failed
+                mainContainer.find(".turn").empty();
+                mainContainer.find(".move").empty();
+                mainContainer.find(".effect").empty();
+                mainContainer.find(".fatal").html("Escape failed!");
+                setTimeout(function() {
+                    monsterTurn();
+                }, 1500);
+            }
+
+        });
+
+        // when clicking on button (BATTLE OVER)
+        $(".battle-over").unbind().click(function() {
+            var outcome = "";
+            if(monsterHealth <= 0) {
+                outcome = "won";
+            }
+            else if(playerHealth <= 0) {
+                outcome = "lost";
+            }
+            console.log(outcome);
+            ReturnToScene(outcome);
+        });
+
+        // When consuming item
+        $(".inventory-element").click(function() {
+            if(!battleOver) {
+                $(".inventory-element").addClass("disabled");
+                // Render what you used
+                mainContainer.find(".battle-choices").css("display", "none");
+                mainContainer.find(".battle-container h4").empty();
+                mainContainer.find(".battle-container .effect").html("You used an item!");
+                setTimeout(function() {
+                    monsterTurn();
+                }, 1500);
+            }
+        });
+    }
+
+    // clear scene (remove all generated html)
+    var clearScene = function() {
+        mainContainer.find(".headline").empty();
+        mainContainer.find(".monster-name").empty()
+        mainContainer.find(".monster-description").empty();
+        mainContainer.find(".monster-hp").empty();
+        mainContainer.find(".monster-damage").empty();
+        mainContainer.find(".monster-hit-chance").empty();
+        mainContainer.find(".turn").empty();
+        mainContainer.find(".move").empty();
+        mainContainer.find(".effect").empty();
+        mainContainer.find(".fatal").empty();
+    }
+
+    // Return to scene (BATTLE OVER)
+    var ReturnToScene = function(outcome) {
+        if(outcome == "won") { // if player has won
+            playerXp += monster.xpGained;
+            playerGold += monster.goldToGive;
+        }
+        else if(outcome == "lost") { // if player has lost
+            playerGold -= monster.goldToTake;
+            playerHealth += 5;
+        }
+        $(".inventory-element").removeClass("disabled");
+
+        // Go back to previous scene
+        BuildScene(currentScene);
+        clearScene();
+        mainContainer.css("display", "none");
+        $("#scene-outer-container").css("display", "block");
+        battleOver = true;
+        return;
+    };
+
+    var GetMonsterAttack = function() {
+        var damage = Math.floor(Math.random() * monster.damageRange[1]) + monster.damageRange[0];
+        return damage;
+    };
+
+    // start turn with monster
+    console.log("Game starting");
+    RenderMonsterStats();
+    monsterTurn();
+    return;
+    
+    // display remaining monster HP
+    // ask player for move
+    // if player attack
+    //     call function to calculate attack
+    //     Minus damage with monster hp
+    //     check if monster is dead
+    //     timeout before monster attack
+    //     call function for monster attack (takes monster)
+    //     minus player hp with monster hp
+    //     check if player dead
+    //     repeat
+    // if player flee
+    //     call function to calculate player flee
+    //     repeat if not success, or quit
+    // if player use item
+    //      call consumeItem function
+    //      repeat
+
+    // if PLAYER WINS
+    //      Congratulate player
+    //      give player xp
+    //      return to last scene
+    // if PLAYER DIES
+    //      Game over screen
+    //      lose some money (if exists)
+    //      go back to last scene
+
+    // --END--
+
+
 }
+
+//---------------------------------//
+
+// 4: Boss fights
+
+//---------------------------------//
+
+// 5: Restore HP
+var RestoreHpEvent = function() {
+    $("#scene-outer-container").css("display", "none");
+    var mainContainer = $("#restore-hp-event-container");
+    mainContainer.css("display", "block");
+    if(playerGold >= 10) {
+        playerGold -= 10;
+        playerHealth = playerMaxHealth;
+        renderStats();
+        mainContainer.find(".effect").html("Your health has been restored!");
+        mainContainer.find(".price").html("10 gold has been removed from your account");
+    }
+    else {
+        mainContainer.find(".effect").html("Sorry, you don't seem to have enough gold!");
+        mainContainer.find(".price").empty();
+    }
+    // add timeout before returning to previous scene
+    setTimeout(function() {
+        mainContainer.css("display", "none")
+        $("#scene-outer-container").css("display", "block");
+    }, 3000);
+}
+
+//---------------------------------//

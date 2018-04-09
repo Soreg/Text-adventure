@@ -6,6 +6,10 @@
 * 2. render inventory
 * 3. load next scene (read choices)
 * 4. Render stats
+* 5. Get monster attack (dmg)
+* 6. Did monster hit (bool)
+* 7. Get player attack
+* 8. Did player flee (bool)
 */
 
 //---------------------------------//
@@ -100,12 +104,24 @@ var renderInventory = function() {
 
   // Add description on hover
   $(".inventory-element").hover(function(e) {
-    var classNames = e.target.className.split(" ");
-    var i = classNames[1];
-    var descP = $(".inventory-item-description");
-    var desc = playerInventory[i].description;
+    if(!$(this).hasClass("disabled")) {
+      var classNames = e.target.className.split(" ");
+      var i = classNames[1];
+      var descP = $(".inventory-item-description");
+      var desc = playerInventory[i].description;
+  
+      descP.html(desc);
+    }
+  });
 
-    descP.html(desc);
+  // Consume item on click (call function)
+  $(".inventory-element").click(function(e) {
+    if(!$(this).hasClass("disabled")) {
+      var classNames = e.target.className.split(" ");
+      var i = classNames[1];
+      var item = playerInventory[i];
+      ConsumeItem(item);
+    }
   });
 
   // change text back on mouse leave
@@ -167,17 +183,85 @@ $(document).on("click", ".choice", function(e) {
   
 // 4: Render stats
 var renderStats = function() {
+  // checck XP
+  if(playerXp >= playerXpForNextLevel) {
+    playerLevel++;
+    playerXp = playerXp - playerXpForNextLevel;
+    playerMaxHealth += 20;
+    playerXpForNextLevel += 20;
+    BuildMonsterArray();
+  }
+  if(playerHealth <= 0) {
+    playerHealth = 0;
+  }
+  else if( playerHealth > playerMaxHealth) {
+    playerHealth = playerMaxHealth;
+  }
+  if(playerGold < 0) {
+    playerGold = 0;
+  }
   var container = $("#stats-container .outer .inner");
   container.find(".name").html(playerName);
   container.find(".level-container").html("<h4>Level " + playerLevel + "</h4>");
   container.find(".level-progress-container").html("<p>" + playerXp + " XP out of " + playerXpForNextLevel + " XP</p>");
-  container.find(".player-stats-container .player-stats.hp").html("<h4>HP: " + playerHealth + "</h4>");
+  container.find(".player-stats-container .player-stats.hp").html("<h4>HP: " + playerHealth + " / " + playerMaxHealth + "</h4>");
   if(playerBonusDamage > 0) {
     container.find(".player-stats-container .player-stats.damage").html("<h4>Damage: " + playerBasicDamage + " (+ " + playerBonusDamage + " bonus)</h4>");
   } else {
     container.find(".player-stats-container .player-stats.damage").html("<h4>Damage: " + playerBasicDamage + "</h4>");  
   }
   container.find(".player-stats-container .player-stats.gold").html("<h4>Gold: " + playerGold + "</h4>");
+}
+
+//---------------------------------//
+
+// 5: Get random monster 
+var GetRandomMonster = function() {
+  var monster = playerWildMonsterArray[
+    Math.floor(
+      Math.random()
+      * playerWildMonsterArray.length
+    )
+  ];
+  return monster;
+}
+
+//---------------------------------//
+
+// 6: Did monster hit (bool)
+var DidMonsterHit = function(monster) {
+  var hit = false;
+  var roll = Math.random();
+  if(roll < monster.hitChance) {
+    hit = true;
+  }
+  else {
+    hit = false;
+  }
+  return hit;
+}
+
+//---------------------------------//
+
+// 7: Get player attack
+var GetPlayerAttack = function() {
+  var playerMinDmg = (playerBasicDamage + playerBonusDamage) - 4;
+  var playerMaxDmg = (playerBasicDamage + playerBonusDamage) + 4;
+
+  var damage = Math.floor(Math.random() * (playerMaxDmg - playerMinDmg + 1)) + playerMinDmg;
+  return damage;
+}
+
+//---------------------------------//
+
+// 8: Did player flee (bool)
+var DidPlayerFlee = function(monster) {
+  var escape = false;
+  var roll = Math.random();
+  if(roll < monster.playerEscapeChance) {
+    escape = true;
+  }
+  return escape;
 }
 
 //---------------------------------//

@@ -18,10 +18,6 @@
                 <div class="inner">
                     <h4>Inventory</h4>
                     <ul>
-                        <li class="health-potion inventory-element">Health potion</li>
-                        <li class="stamina-potion inventory-element">Stamina potion</li>
-                        <li class="fireball-scroll inventory-element">Fireball scroll</li>
-                        <li class="rat-meat inventory-element">Rat's meat</li>
                     </ul>
                     <div class="description-container">
                         <p class="inventory-item-description">Description</p>
@@ -89,6 +85,60 @@
             </div>
         </div>
         <!-- End of shop container -->
+
+        <!-- Battle container -->
+        <div id="battle-event-container">
+            <div class="battle">
+                <div class="outer">
+                    <div class="inner">
+                        <div class="description-container">
+                            <h3 class="headline"></h3>
+                            <h4 class="monster-name"></h4>
+                            <h4 class="monster-description"></h4>
+                            <h4 class="monster-hp"></h4>
+                            <div class="descriptions">
+                                <h4 class="monster-damage description"></h4>
+                                <h4 class="monster-hit-chance description"></h4>
+                            </div>
+                        </div>
+                        <div class="battle-container">
+                            <h4 class="turn"></h4>
+                            <h4 class="move"></h4>
+                            <h4 class="effect"></h4>
+                            <h4 class="fatal"></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="battle-choices">
+                <div class="outer">
+                    <div class="inner">
+                        <div class="round-choices">
+                            <div class="battle-attack button-choice disabled">Attack!</div>
+                            <div class="battle-run button-choice">Try to run</div>
+                        </div>
+                        <div class="finish-choices">
+                            <div class="battle-over button-choice disabled">Back</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of battle container -->
+
+        <!-- Restore HP container -->
+        <div id="restore-hp-event-container">
+            <div class="restore-hp">
+                <div class="outer">
+                    <div class="inner">
+                        <h4 class="effect"></h4>
+                        <h4 class="price"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of restore HP container -->
 
         <!-- Stats container -->
         <div id="stats-container">
